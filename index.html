@@ -68,7 +68,8 @@ section h2{font-size:30px;margin-bottom:8px}
 .card li{padding:2px 0}
 .gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));grid-auto-rows:210px;gap:14px}
 .gal figure{margin:0;position:relative;border-radius:16px;overflow:hidden;background:var(--soft)}
-.gal figure[hidden]{display:none}
+.gal figure[hidden],.tabs[hidden]{display:none}
+.gal .play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:54px;height:54px;border-radius:50%;background:rgba(8,14,24,.62);color:#fff;display:grid;place-items:center;font-size:20px;pointer-events:none}
 .gal .big{grid-column:span 2;grid-row:span 2}
 .gal button{all:unset;display:block;width:100%;height:100%;cursor:zoom-in}
 .gal button:focus-visible{outline:3px solid var(--brand);outline-offset:-3px}
@@ -78,7 +79,8 @@ section h2{font-size:30px;margin-bottom:8px}
 dialog{border:0;padding:0;border-radius:16px;max-width:min(92vw,880px);width:100%;background:var(--surface);color:var(--ink);box-shadow:0 20px 60px rgba(0,0,0,.4)}
 dialog::backdrop{background:rgba(6,10,18,.72)}
 dialog .lb{max-height:78vh;display:grid;background:var(--soft)}
-dialog .lb img,dialog .lb svg{width:100%;max-height:78vh;object-fit:contain}
+dialog .lb img,dialog .lb svg,dialog .lb video{width:100%;max-height:78vh;object-fit:contain}
+dialog .lb video{background:#000}
 dialog p{margin:0;padding:14px 18px;display:flex;justify-content:space-between;gap:12px;align-items:center}
 dialog button{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:6px 12px;font:inherit;cursor:pointer}
 footer{border-top:1px solid var(--line);padding:48px 0;color:var(--mute);font-size:14px}
@@ -102,7 +104,7 @@ footer{border-top:1px solid var(--line);padding:48px 0;color:var(--mute);font-si
 <p class="lead">Trabajo en proyectos de clasificación, clustering y deep learning. Me interesa aplicar IA y ciencia de datos a problemas reales para generar valor a partir de los datos.</p>
 <div class="cta"><a class="btn p" href="#proyectos">Ver proyectos</a><a class="btn s" href="https://github.com/Chispa4013" target="_blank" rel="noopener">GitHub</a></div>
 </div>
-<div class="photo"><img src="Images/javier.jpg" alt="Javier Senabre con un telescopio terrestre en un entorno natural"></div>
+<div class="photo"><img src="images/javier.jpg" alt="Javier Senabre con un telescopio terrestre en un entorno natural"></div>
 </div>
 
 <section id="proyectos"><div class="wrap">
@@ -137,16 +139,12 @@ footer{border-top:1px solid var(--line);padding:48px 0;color:var(--mute);font-si
 <section id="aves"><div class="wrap">
 <h2>Observación y grabación de aves</h2>
 <p class="sub">Mi afición fuera de la pantalla: salir al campo a observar y grabar pájaros. De ahí nació mi TFG sobre clasificación de aves por su canto, y sigue alimentando mis proyectos de audio.</p>
-<div class="tabs" id="tabs" role="group" aria-label="Filtrar galería">
-<button class="chip" data-k="all" aria-pressed="true">Todo</button>
-<button class="chip" data-k="foto" aria-pressed="false">Campo</button>
-<button class="chip" data-k="sono" aria-pressed="false">Sonogramas</button>
-</div>
+<div class="tabs" id="tabs" role="group" aria-label="Filtrar galería"></div>
 <div class="gal" id="gal">
-<figure class="big" data-k="foto"><button aria-label="Ampliar: Observación con telescopio terrestre"><img loading="lazy" decoding="async" src="Images/telescopio.jpg" alt="Telescopio terrestre sobre trípode con adaptador para móvil"></button><figcaption>Telescopio terrestre con adaptador para móvil</figcaption></figure>
-<figure data-k="foto"><button aria-label="Ampliar: Entre el arbolado"><img loading="lazy" decoding="async" src="Images/arbolado.jpg" alt="Árboles con brotes verdes y cielo azul"></button><figcaption>Entre el arbolado</figcaption></figure>
+<figure class="big" data-k="foto"><button aria-label="Ampliar: Observación con telescopio terrestre"><img loading="lazy" decoding="async" src="images/telescopio.jpg" alt="Telescopio terrestre sobre trípode con adaptador para móvil"></button><figcaption>Telescopio terrestre con adaptador para móvil</figcaption></figure>
+<figure data-k="foto"><button aria-label="Ampliar: Entre el arbolado"><img loading="lazy" decoding="async" src="images/arbolado.jpg" alt="Árboles con brotes verdes y cielo azul"></button><figcaption>Entre el arbolado</figcaption></figure>
 <figure data-k="sono"><button aria-label="Ampliar sonograma 1"><div data-spec="7" style="width:100%;height:100%"></div></button><figcaption>Sonograma ilustrativo</figcaption></figure>
-<figure data-k="foto"><button aria-label="Ampliar: Jornada de campo"><img loading="lazy" decoding="async" src="Images/jornada-campo.jpg" alt="Zona de carrizal y pasarela de madera"></button><figcaption>Jornada de campo</figcaption></figure>
+<figure data-k="foto"><button aria-label="Ampliar: Jornada de campo"><img loading="lazy" decoding="async" src="images/jornada-campo.jpg" alt="Zona de carrizal y pasarela de madera"></button><figcaption>Jornada de campo</figcaption></figure>
 <figure data-k="sono"><button aria-label="Ampliar sonograma 2"><div data-spec="23" style="width:100%;height:100%"></div></button><figcaption>Sonograma ilustrativo</figcaption></figure>
 </div>
 </div></section>
@@ -204,12 +202,47 @@ list.appendChild(el)});
 if(!n)list.innerHTML='<p class="empty">No hay proyectos con esa etiqueta.</p>'}
 render();
 document.querySelectorAll("[data-spec]").forEach(function(d){d.innerHTML=spec(+d.dataset.spec,+d.dataset.spec>10)});
-var tabs=document.querySelectorAll("#tabs .chip"),figs=document.querySelectorAll("#gal figure");
-tabs.forEach(function(t){t.onclick=function(){tabs.forEach(function(x){x.setAttribute("aria-pressed",String(x===t))});figs.forEach(function(f){f.hidden=t.dataset.k!=="all"&&f.dataset.k!==t.dataset.k})}});
-var dlg=document.getElementById("dlg"),lb=document.getElementById("lb"),cap=document.getElementById("cap");
-figs.forEach(function(f){f.querySelector("button").onclick=function(){var m=f.querySelector("img,svg").cloneNode(true);lb.innerHTML="";lb.appendChild(m);cap.textContent=f.querySelector("figcaption").textContent;dlg.showModal()}});
+var CLOUD="",TAG="portafolio-aves";
+var gal=document.getElementById("gal"),tabsEl=document.getElementById("tabs"),dlg=document.getElementById("dlg"),lb=document.getElementById("lb"),cap=document.getElementById("cap"),kind="all";
+var names={all:"Todo",foto:"Fotos",video:"Vídeos",sono:"Sonogramas"};
+function apply(){gal.querySelectorAll("figure").forEach(function(f){f.hidden=kind!=="all"&&f.dataset.k!==kind})}
+function tabs(){
+var ks=["all"];["foto","video","sono"].forEach(function(k){if(gal.querySelector('figure[data-k="'+k+'"]'))ks.push(k)});
+if(ks.indexOf(kind)<0)kind="all";
+tabsEl.innerHTML="";
+ks.forEach(function(k){var b=document.createElement("button");b.className="chip";b.textContent=names[k];b.setAttribute("aria-pressed",String(k===kind));b.onclick=function(){kind=k;apply();tabs()};tabsEl.appendChild(b)});
+tabsEl.hidden=ks.length<3}
+function title(id){return id.split("/").pop().replace(/[-_]+/g," ").replace(/^\w/,function(c){return c.toUpperCase()})}
+function list(type){
+return fetch("https://res.cloudinary.com/"+encodeURIComponent(CLOUD)+"/"+type+"/list/"+encodeURIComponent(TAG)+".json").then(function(r){return r.ok?r.json():{resources:[]}}).then(function(j){return(j.resources||[]).map(function(x){x.rt=type;return x})}).catch(function(){return[]})}
+function fig(x,i){
+var u="https://res.cloudinary.com/"+encodeURIComponent(CLOUD)+"/"+x.rt+"/upload/",p="/v"+x.version+"/"+encodeURI(x.public_id),v=x.rt==="video";
+var c=(x.context&&x.context.custom&&x.context.custom.caption)||title(x.public_id),f=document.createElement("figure"),b=document.createElement("button"),k=document.createElement("figcaption");
+f.dataset.k=v?"video":"foto";if(i===0)f.className="big";
+f.dataset.src=v?u+"q_auto,c_limit,w_1280"+p+".mp4":u+"f_auto,q_auto,c_limit,w_1600"+p;f.dataset.t=x.rt;f.dataset.alt=c;
+b.setAttribute("aria-label",(v?"Reproducir: ":"Ampliar: ")+c);
+var m=document.createElement("img");m.loading="lazy";m.decoding="async";m.alt=c;
+m.src=v?u+"so_0,c_fill,w_700,h_700,q_auto"+p+".jpg":u+"f_auto,q_auto,c_fill,w_700,h_700"+p;
+b.appendChild(m);
+if(v){var s=document.createElement("span");s.className="play";s.setAttribute("aria-hidden","true");s.textContent="▶";b.appendChild(s)}
+k.textContent=c;f.appendChild(b);f.appendChild(k);return f}
+function load(){
+if(!CLOUD)return;
+Promise.all([list("image"),list("video")]).then(function(r){
+var all=r[0].concat(r[1]).sort(function(a,b){return(a.created_at||"")<(b.created_at||"")?1:-1}).slice(0,60);
+if(!all.length)return;
+gal.innerHTML="";all.forEach(function(x,i){gal.appendChild(fig(x,i))});tabs();apply()})}
+gal.addEventListener("click",function(e){
+var b=e.target.closest("button");if(!b)return;
+var f=b.parentNode,m;
+if(f.dataset.t==="video"){m=document.createElement("video");m.controls=true;m.autoplay=true;m.playsInline=true;m.src=f.dataset.src}
+else if(f.dataset.src){m=document.createElement("img");m.src=f.dataset.src;m.alt=f.dataset.alt||""}
+else m=f.querySelector("img,svg").cloneNode(true);
+lb.innerHTML="";lb.appendChild(m);cap.textContent=f.querySelector("figcaption").textContent;dlg.showModal()});
+dlg.addEventListener("close",function(){lb.innerHTML=""});
 document.getElementById("x").onclick=function(){dlg.close()};
 dlg.addEventListener("click",function(e){if(e.target===dlg)dlg.close()});
+tabs();apply();load();
 var root=document.documentElement;
 document.getElementById("theme").onclick=function(){var d=root.dataset.theme?root.dataset.theme==="dark":matchMedia("(prefers-color-scheme:dark)").matches;root.dataset.theme=d?"light":"dark"};
 </script>
