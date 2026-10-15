@@ -140,13 +140,8 @@ footer{border-top:1px solid var(--line);padding:48px 0;color:var(--mute);font-si
 <h2>Observación y grabación de aves</h2>
 <p class="sub">Mi afición fuera de la pantalla: salir al campo a observar y grabar pájaros. De ahí nació mi TFG sobre clasificación de aves por su canto, y sigue alimentando mis proyectos de audio.</p>
 <div class="tabs" id="tabs" role="group" aria-label="Filtrar galería"></div>
-<div class="gal" id="gal">
-<figure class="big" data-k="foto"><button aria-label="Ampliar: Observación con telescopio terrestre"><img loading="lazy" decoding="async" src="images/telescopio.jpg" alt="Telescopio terrestre sobre trípode con adaptador para móvil"></button><figcaption>Telescopio terrestre con adaptador para móvil</figcaption></figure>
-<figure data-k="foto"><button aria-label="Ampliar: Entre el arbolado"><img loading="lazy" decoding="async" src="images/arbolado.jpg" alt="Árboles con brotes verdes y cielo azul"></button><figcaption>Entre el arbolado</figcaption></figure>
-<figure data-k="sono"><button aria-label="Ampliar sonograma 1"><div data-spec="7" style="width:100%;height:100%"></div></button><figcaption>Sonograma ilustrativo</figcaption></figure>
-<figure data-k="foto"><button aria-label="Ampliar: Jornada de campo"><img loading="lazy" decoding="async" src="images/jornada-campo.jpg" alt="Zona de carrizal y pasarela de madera"></button><figcaption>Jornada de campo</figcaption></figure>
-<figure data-k="sono"><button aria-label="Ampliar sonograma 2"><div data-spec="23" style="width:100%;height:100%"></div></button><figcaption>Sonograma ilustrativo</figcaption></figure>
-</div>
+<p class="sub" id="galmsg" role="status"></p>
+<div class="gal" id="gal"></div>
 </div></section>
 </main>
 
@@ -213,8 +208,8 @@ tabsEl.innerHTML="";
 ks.forEach(function(k){var b=document.createElement("button");b.className="chip";b.textContent=names[k];b.setAttribute("aria-pressed",String(k===kind));b.onclick=function(){kind=k;apply();tabs()};tabsEl.appendChild(b)});
 tabsEl.hidden=ks.length<3}
 function title(id){return id.split("/").pop().replace(/[-_]+/g," ").replace(/^\w/,function(c){return c.toUpperCase()})}
-function list(type){
-return fetch("https://res.cloudinary.com/"+encodeURIComponent(CLOUD)+"/"+type+"/list/"+encodeURIComponent(TAG)+".json").then(function(r){return r.ok?r.json():{resources:[]}}).then(function(j){return(j.resources||[]).map(function(x){x.rt=type;return x})}).catch(function(){return[]})}
+function cldList(type){
+return fetch("https://res.cloudinary.com/"+encodeURIComponent(CLOUD)+"/"+type+"/list/"+encodeURIComponent(TAG)+".json").then(function(r){if(!r.ok){console.warn("Cloudinary "+type+": error "+r.status);return{resources:[]}}return r.json()}).then(function(j){return(j.resources||[]).map(function(x){x.rt=type;return x})}).catch(function(e){console.warn("Cloudinary "+type+": "+e);return[]})}
 function fig(x,i){
 var u="https://res.cloudinary.com/"+encodeURIComponent(CLOUD)+"/"+x.rt+"/upload/",p="/v"+x.version+"/"+encodeURI(x.public_id),v=x.rt==="video";
 var c=(x.context&&x.context.custom&&x.context.custom.caption)||title(x.public_id),f=document.createElement("figure"),b=document.createElement("button"),k=document.createElement("figcaption");
@@ -226,11 +221,15 @@ m.src=v?u+"so_0,c_fill,w_700,h_700,q_auto"+p+".jpg":u+"f_auto,q_auto,c_fill,w_70
 b.appendChild(m);
 if(v){var s=document.createElement("span");s.className="play";s.setAttribute("aria-hidden","true");s.textContent="▶";b.appendChild(s)}
 k.textContent=c;f.appendChild(b);f.appendChild(k);return f}
+var msg=document.getElementById("galmsg");
+function empty(){msg.textContent="Pronto añadiré aquí mis fotos y vídeos de campo."}
 function load(){
-if(!CLOUD)return;
-Promise.all([list("image"),list("video")]).then(function(r){
+if(!CLOUD){empty();return}
+msg.textContent="Cargando galería…";
+Promise.all([cldList("image"),cldList("video")]).then(function(r){
 var all=r[0].concat(r[1]).sort(function(a,b){return(a.created_at||"")<(b.created_at||"")?1:-1}).slice(0,60);
-if(!all.length)return;
+console.info("Cloudinary: "+all.length+" archivos");if(!all.length){empty();return}
+msg.hidden=true;
 gal.innerHTML="";all.forEach(function(x,i){gal.appendChild(fig(x,i))});tabs();apply()})}
 gal.addEventListener("click",function(e){
 var b=e.target.closest("button");if(!b)return;
