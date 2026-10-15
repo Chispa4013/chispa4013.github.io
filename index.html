@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Javier Senabre Urrea · Portafolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600;700;800&family=Rubik:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f6fa;--surface:#fff;--ink:#16202e;--mute:#5b6676;--line:#dde2ea;--brand:#43669a;--brand-ink:#fff;--soft:#e8eef7;--sh:0 1px 2px rgba(22,32,46,.05),0 8px 24px rgba(22,32,46,.07);
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e141d;--surface:#161e2a;--ink:#e9eef6;--mute:#9aa6b8;--line:#263142;--brand:#7fa3d9;--brand-ink:#0e141d;--soft:#1d2939;--sh:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e141d;--surface:#161e2a;--ink:#e9eef6;--mute:#9aa6b8;--line:#263142;--brand:#7fa3d9;--brand-ink:#0e141d;--soft:#1d2939;--sh:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);color-scheme:dark}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 Rubik,system-ui,sans-serif}
+h1,h2,h3{font-family:Raleway,system-ui,sans-serif;line-height:1.15;margin:0}
+a{color:var(--brand)}
+:focus-visible{outline:2px solid var(--brand);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1000px;margin:0 auto;padding:0 24px}
+header.bar{position:sticky;top:env(safe-area-inset-top,0px);background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:5}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:6}
+header.bar .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:16px}
+header.bar b{font-family:Raleway,sans-serif;font-weight:800;letter-spacing:.02em}
+nav{display:flex;gap:22px;align-items:center;font-size:15px}
+nav a{color:var(--mute);text-decoration:none}nav a:hover{color:var(--ink)}
+.theme{background:var(--surface);border:1px solid var(--line);color:var(--ink);border-radius:10px;width:36px;height:36px;cursor:pointer;font-size:16px}
+.hero{display:grid;grid-template-columns:1.25fr 1fr;gap:56px;align-items:center;padding:72px 24px 64px}
+.hero h1{font-size:clamp(38px,6.4vw,64px);font-weight:800;letter-spacing:-.02em}
+.hero .role{font-family:Raleway,sans-serif;font-weight:600;font-size:clamp(17px,2.6vw,22px);color:var(--brand);margin:16px 0 18px}
+.hero .lead{max-width:56ch;color:var(--mute);margin:0 0 28px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:11px 20px;border-radius:10px;text-decoration:none;font-weight:500;border:1px solid var(--brand);transition:transform .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn.p{background:var(--brand);color:var(--brand-ink)}
+.btn.s{color:var(--brand);background:transparent}
+.photo{position:relative;justify-self:center;width:min(100%,340px)}
+.photo::before{content:"";position:absolute;inset:18px -18px -18px 18px;background:var(--brand);border-radius:22px;opacity:.9}
+.photo img{position:relative;display:block;width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:22px;box-shadow:var(--sh)}
+section{padding:64px 0;border-top:1px solid var(--line)}
+section h2{font-size:30px;margin-bottom:8px}
+.sub{color:var(--mute);margin:0 0 28px;max-width:62ch}
+.chips,.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.chip{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:6px 14px;font:inherit;font-size:14px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.list{display:grid;gap:20px}
+.proj{display:grid;grid-template-columns:260px 1fr;gap:28px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:var(--sh);transition:transform .2s}
+.proj:hover{transform:translateY(-2px)}
+.pimg{border-radius:12px;overflow:hidden;aspect-ratio:4/3;background:var(--soft)}
+.pimg svg{display:block;width:100%;height:100%}
+.pbody{padding:6px 8px 6px 0;display:flex;flex-direction:column;align-items:flex-start}
+.proj h3{font-size:21px}
+.meta{color:var(--mute);font-size:14px;margin:4px 0 10px}
+.proj p{margin:0 0 12px;color:var(--ink);max-width:62ch}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 14px}
+.tag{background:var(--soft);color:var(--brand);font-size:13px;padding:2px 10px;border-radius:6px}
+.pbody .btn{margin-top:auto;padding:7px 14px;font-size:14px}
+.empty{color:var(--mute)}
+.tl{list-style:none;margin:0;padding:0 0 0 20px;border-left:2px solid var(--line)}
+.tl li{position:relative;padding:0 0 26px 20px}
+.tl li::before{content:"";position:absolute;left:-27px;top:7px;width:12px;height:12px;border-radius:50%;background:var(--brand);border:3px solid var(--bg)}
+.tl b{font-family:Raleway,sans-serif;font-size:18px}
+.tl span{display:block;color:var(--mute);font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px 22px;box-shadow:var(--sh)}
+.card h3{font-size:16px;margin-bottom:10px;color:var(--brand)}
+.card ul{margin:0;padding:0;list-style:none;color:var(--mute)}
+.card li{padding:2px 0}
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));grid-auto-rows:210px;gap:14px}
+.gal figure{margin:0;position:relative;border-radius:16px;overflow:hidden;background:var(--soft)}
+.gal figure[hidden]{display:none}
+.gal .big{grid-column:span 2;grid-row:span 2}
+.gal button{all:unset;display:block;width:100%;height:100%;cursor:zoom-in}
+.gal button:focus-visible{outline:3px solid var(--brand);outline-offset:-3px}
+.gal img,.gal svg{display:block;width:100%;height:100%;object-fit:cover;transition:transform .3s}
+.gal figure:hover img,.gal figure:hover svg{transform:scale(1.04)}
+.gal figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 14px 10px;color:#fff;font-size:14px;background:linear-gradient(transparent,rgba(8,14,24,.75))}
+dialog{border:0;padding:0;border-radius:16px;max-width:min(92vw,880px);width:100%;background:var(--surface);color:var(--ink);box-shadow:0 20px 60px rgba(0,0,0,.4)}
+dialog::backdrop{background:rgba(6,10,18,.72)}
+dialog .lb{max-height:78vh;display:grid;background:var(--soft)}
+dialog .lb img,dialog .lb svg{width:100%;max-height:78vh;object-fit:contain}
+dialog p{margin:0;padding:14px 18px;display:flex;justify-content:space-between;gap:12px;align-items:center}
+dialog button{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:6px 12px;font:inherit;cursor:pointer}
+footer{border-top:1px solid var(--line);padding:48px 0;color:var(--mute);font-size:14px}
+.contact{display:flex;gap:12px;flex-wrap:wrap}
+@media (max-width:760px){nav a.h{display:none}.hero{grid-template-columns:1fr;gap:36px;padding-top:44px}.photo{order:-1;width:min(78%,280px);margin-right:18px}.proj{grid-template-columns:1fr}.gal .big{grid-column:span 1;grid-row:span 1}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header class="bar"><div class="wrap">
+<b>JSU</b>
+<nav><a class="h" href="#proyectos">Proyectos</a><a class="h" href="#trayectoria">Trayectoria</a><a class="h" href="#skills">Habilidades</a><a class="h" href="#aves">Aves</a><a href="#contacto">Contacto</a>
+<button class="theme" id="theme" aria-label="Cambiar tema">◐</button></nav>
+</div></header>
+
+<main>
+<div class="wrap hero">
+<div>
+<h1>Javier Senabre Urrea</h1>
+<p class="role">Ingeniero informático · IA, machine learning y análisis de datos</p>
+<p class="lead">Trabajo en proyectos de clasificación, clustering y deep learning. Me interesa aplicar IA y ciencia de datos a problemas reales para generar valor a partir de los datos.</p>
+<div class="cta"><a class="btn p" href="#proyectos">Ver proyectos</a><a class="btn s" href="https://github.com/Chispa4013" target="_blank" rel="noopener">GitHub</a></div>
+</div>
+<div class="photo"><img src="images/javier.jpg" alt="Javier Senabre con un telescopio terrestre en un entorno natural"></div>
+</div>
+
+<section id="proyectos"><div class="wrap">
+<h2>Proyectos</h2>
+<p class="sub">Filtra por tecnología para ver solo los que te interesan.</p>
+<div class="chips" id="chips" role="group" aria-label="Filtrar proyectos"></div>
+<div class="list" id="list"></div>
+</div></section>
+
+
+<section id="trayectoria"><div class="wrap">
+<h2>Trayectoria</h2>
+<p class="sub">Formación y experiencia.</p>
+<ul class="tl">
+<li><b>Máster en Ingeniería Informática (MUII)</b><span>Universidad de Castilla-La Mancha, Albacete · 2024–2026</span></li>
+<li><b>Ingeniero informático · Panadero SL</b><span>3 meses · Desarrollo de un chatbot</span></li>
+<li><b>Desarrollador de videojuegos de realidad virtual · Cerebroom VR Games</b><span>2 meses · Albacete</span></li>
+<li><b>Grado en Ingeniería Informática</b><span>Universidad de Castilla-La Mancha, Albacete · 2020–2024</span></li>
+</ul>
+</div></section>
+
+<section id="skills"><div class="wrap">
+<h2>Habilidades</h2>
+<p class="sub">Herramientas con las que trabajo.</p>
+<div class="grid">
+<div class="card"><h3>Lenguajes</h3><ul><li>Python</li><li>Java</li><li>JavaScript</li><li>C#</li><li>SQL</li></ul></div>
+<div class="card"><h3>Datos y cloud</h3><ul><li>Spark</li><li>AWS</li><li>MongoDB</li><li>Power BI</li><li>Grafana</li><li>Docker</li><li>API REST</li><li>n8n</li></ul></div>
+<div class="card"><h3>Otros</h3><ul><li>GitHub</li><li>Linux</li><li>Arduino y ESP32</li><li>Metodología SCRUM</li><li>Inglés B1</li></ul></div>
+</div>
+</div></section>
+
+<section id="aves"><div class="wrap">
+<h2>Observación y grabación de aves</h2>
+<p class="sub">Mi afición fuera de la pantalla: salir al campo a observar y grabar pájaros. De ahí nació mi TFG sobre clasificación de aves por su canto, y sigue alimentando mis proyectos de audio.</p>
+<div class="tabs" id="tabs" role="group" aria-label="Filtrar galería">
+<button class="chip" data-k="all" aria-pressed="true">Todo</button>
+<button class="chip" data-k="foto" aria-pressed="false">Campo</button>
+<button class="chip" data-k="sono" aria-pressed="false">Sonogramas</button>
+</div>
+<div class="gal" id="gal">
+<figure class="big" data-k="foto"><button aria-label="Ampliar: Observación con telescopio terrestre"><img loading="lazy" decoding="async" src="images/telescopio.jpg" alt="Telescopio terrestre sobre trípode con adaptador para móvil"></button><figcaption>Telescopio terrestre con adaptador para móvil</figcaption></figure>
+<figure data-k="foto"><button aria-label="Ampliar: Entre el arbolado"><img loading="lazy" decoding="async" src="images/arbolado.jpg" alt="Árboles con brotes verdes y cielo azul"></button><figcaption>Entre el arbolado</figcaption></figure>
+<figure data-k="sono"><button aria-label="Ampliar sonograma 1"><div data-spec="7" style="width:100%;height:100%"></div></button><figcaption>Sonograma ilustrativo</figcaption></figure>
+<figure data-k="foto"><button aria-label="Ampliar: Jornada de campo"><img loading="lazy" decoding="async" src="images/jornada-campo.jpg" alt="Zona de carrizal y pasarela de madera"></button><figcaption>Jornada de campo</figcaption></figure>
+<figure data-k="sono"><button aria-label="Ampliar sonograma 2"><div data-spec="23" style="width:100%;height:100%"></div></button><figcaption>Sonograma ilustrativo</figcaption></figure>
+</div>
+</div></section>
+</main>
+
+<footer id="contacto"><div class="wrap">
+<h2 style="font-size:24px;margin-bottom:8px;color:var(--ink)">Contacto</h2>
+<p style="margin:0 0 20px">Escríbeme si quieres hablar de un proyecto o una oportunidad.</p>
+<div class="contact">
+<a class="btn p" href="mailto:Javiersenasu@gmail.com">Javiersenasu@gmail.com</a>
+<a class="btn s" href="tel:+34639624985">+34 639 62 49 85</a>
+<a class="btn s" href="https://github.com/Chispa4013" target="_blank" rel="noopener">github.com/Chispa4013</a>
+</div>
+</div></footer>
+
+<dialog id="dlg"><div class="lb" id="lb"></div><p><span id="cap"></span><button id="x">Cerrar</button></p></dialog>
+
+<script>
+function rng(s){return function(){s=(s*16807)%2147483647;return s/2147483647}}
+function spec(seed,noisy){
+var r=rng(seed),o='<svg viewBox="0 0 320 240" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="g'+seed+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b1626"/><stop offset="1" stop-color="#1a3a63"/></linearGradient><filter id="b"><feGaussianBlur stdDeviation="1.4"/></filter></defs><rect width="320" height="240" fill="url(#g'+seed+')"/>';
+for(var i=0;i<44;i++){o+='<rect x="0" y="'+(i*5.5).toFixed(1)+'" width="320" height="3" fill="#3b6aa8" opacity="'+(r()*.22).toFixed(2)+'"/>'}
+if(noisy){for(var k=0;k<110;k++){o+='<circle cx="'+(r()*320).toFixed(0)+'" cy="'+(r()*240).toFixed(0)+'" r="'+(r()*2+.4).toFixed(1)+'" fill="#9cc3ff" opacity="'+(r()*.5).toFixed(2)+'"/>'}}
+for(var c=0;c<5;c++){var x=20+c*58+r()*14,y=40+r()*150,w=30+r()*18,up=r()>.4?-1:1,h=40+r()*50;
+o+='<path d="M'+x.toFixed(0)+' '+y.toFixed(0)+' Q'+(x+w/2).toFixed(0)+' '+(y+up*h).toFixed(0)+' '+(x+w).toFixed(0)+' '+(y+up*h*.2).toFixed(0)+'" fill="none" stroke="#ffd479" stroke-width="3.2" stroke-linecap="round" filter="url(#b)" opacity=".95"/><path d="M'+x.toFixed(0)+' '+(y+10).toFixed(0)+' Q'+(x+w/2).toFixed(0)+' '+(y+10+up*h).toFixed(0)+' '+(x+w).toFixed(0)+' '+(y+10+up*h*.2).toFixed(0)+'" fill="none" stroke="#7fb0ff" stroke-width="2" stroke-linecap="round" opacity=".6"/>'}
+return o+'</svg>'}
+function scatter(){
+var r=rng(11),cols=['#43669a','#e08a4a','#3f9d7a','#b0578d','#8a8f98'],cs=[[80,70],[230,60],[150,130],[70,180],[245,170]],o='<svg viewBox="0 0 320 240" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g stroke="var(--line)" stroke-width="1"><path d="M30 20V215H300"/></g>';
+cs.forEach(function(c,i){o+='<ellipse cx="'+c[0]+'" cy="'+c[1]+'" rx="42" ry="32" fill="'+cols[i]+'" opacity=".12"/>';for(var k=0;k<16;k++){o+='<circle cx="'+(c[0]+(r()+r()+r()-1.5)*34).toFixed(0)+'" cy="'+(c[1]+(r()+r()+r()-1.5)*26).toFixed(0)+'" r="4.2" fill="'+cols[i]+'" opacity=".9"/>'}});
+return o+'</svg>'}
+function chat(){return '<svg viewBox="0 0 320 240" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="28" y="34" width="150" height="42" rx="14" fill="var(--line)"/><rect x="44" y="50" width="90" height="8" rx="4" fill="var(--mute)" opacity=".5"/><rect x="132" y="92" width="160" height="52" rx="14" fill="var(--brand)"/><rect x="148" y="108" width="110" height="8" rx="4" fill="var(--brand-ink)" opacity=".8"/><rect x="148" y="123" width="70" height="8" rx="4" fill="var(--brand-ink)" opacity=".5"/><rect x="28" y="160" width="120" height="42" rx="14" fill="var(--line)"/><circle cx="62" cy="181" r="4.5" fill="var(--mute)"/><circle cx="80" cy="181" r="4.5" fill="var(--mute)" opacity=".7"/><circle cx="98" cy="181" r="4.5" fill="var(--mute)" opacity=".4"/></svg>'}
+function vr(){return '<svg viewBox="0 0 320 240" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M40 118Q160 60 280 118" fill="none" stroke="var(--mute)" stroke-width="10" stroke-linecap="round" opacity=".5"/><rect x="70" y="92" width="180" height="92" rx="26" fill="var(--brand)"/><circle cx="125" cy="138" r="26" fill="var(--brand-ink)" opacity=".92"/><circle cx="195" cy="138" r="26" fill="var(--brand-ink)" opacity=".92"/><circle cx="125" cy="138" r="11" fill="var(--brand)"/><circle cx="195" cy="138" r="11" fill="var(--brand)"/></svg>'}
+var projects=[
+{t:"Clustering en balonmano de alto rendimiento",m:"TFM · Máster en Ingeniería Informática",img:scatter,tags:["Python","Machine learning","Clustering"],d:"Caracterización de jugadores de élite con datos de la EHF mediante clustering (K-Means, Ward, DBSCAN) y clasificación supervisada (Random Forest, XGBoost, SVM, MLP), con interpretabilidad SHAP. El agrupamiento coincide en torno al 80 % con las nominaciones a MVP.",l:"https://github.com/Chispa4013"},
+{t:"Clasificación automática de pájaros según su canto",m:"TFG · Grado en Ingeniería Informática",img:function(){return spec(41,false)},tags:["Python","Deep learning","Audio"],d:"Sistema que identifica especies de aves a partir de grabaciones de su canto, usando aprendizaje automático sobre audio.",l:"https://github.com/Chispa4013"},
+{t:"Generación artificial de cantos de aves",m:"Proyecto en desarrollo",img:function(){return spec(5,true)},tags:["Python","Deep learning","Audio","IA generativa"],d:"Generación de cantos a partir de mel-espectrogramas con modelos de difusión, con grabaciones de Xeno-canto como base de datos.",l:""},
+{t:"Chatbot para Panadero SL",m:"Experiencia profesional · 3 meses",img:chat,tags:["Chatbot","API REST"],d:"Desarrollo de un chatbot como ingeniero informático en la empresa.",l:""},
+{t:"Videojuegos de realidad virtual",m:"Cerebroom VR Games · 2 meses",img:vr,tags:["C#","Realidad virtual"],d:"Desarrollo de videojuegos de realidad virtual en equipo, con metodología SCRUM.",l:""}
+];
+var active=null,chips=document.getElementById("chips"),list=document.getElementById("list"),tags=[];
+projects.forEach(function(p){p.tags.forEach(function(x){if(tags.indexOf(x)<0)tags.push(x)})});
+function chip(label,val){var b=document.createElement("button");b.className="chip";b.textContent=label;b.setAttribute("aria-pressed",String(active===val));b.onclick=function(){active=val;render()};return b}
+function render(){
+chips.innerHTML="";chips.appendChild(chip("Todos",null));tags.forEach(function(x){chips.appendChild(chip(x,x))});
+list.innerHTML="";var n=0;
+projects.forEach(function(p){
+if(active&&p.tags.indexOf(active)<0)return;n++;
+var el=document.createElement("article");el.className="proj";
+el.innerHTML='<div class="pimg"></div><div class="pbody"><h3></h3><div class="meta"></div><p></p><div class="tags"></div></div>';
+el.querySelector(".pimg").innerHTML=p.img();
+el.querySelector("h3").textContent=p.t;el.querySelector(".meta").textContent=p.m;el.querySelector("p").textContent=p.d;
+p.tags.forEach(function(x){var s=document.createElement("span");s.className="tag";s.textContent=x;el.querySelector(".tags").appendChild(s)});
+if(p.l){var a=document.createElement("a");a.className="btn s";a.href=p.l;a.target="_blank";a.rel="noopener";a.textContent="Ver código en GitHub";el.querySelector(".pbody").appendChild(a)}
+list.appendChild(el)});
+if(!n)list.innerHTML='<p class="empty">No hay proyectos con esa etiqueta.</p>'}
+render();
+document.querySelectorAll("[data-spec]").forEach(function(d){d.innerHTML=spec(+d.dataset.spec,+d.dataset.spec>10)});
+var tabs=document.querySelectorAll("#tabs .chip"),figs=document.querySelectorAll("#gal figure");
+tabs.forEach(function(t){t.onclick=function(){tabs.forEach(function(x){x.setAttribute("aria-pressed",String(x===t))});figs.forEach(function(f){f.hidden=t.dataset.k!=="all"&&f.dataset.k!==t.dataset.k})}});
+var dlg=document.getElementById("dlg"),lb=document.getElementById("lb"),cap=document.getElementById("cap");
+figs.forEach(function(f){f.querySelector("button").onclick=function(){var m=f.querySelector("img,svg").cloneNode(true);lb.innerHTML="";lb.appendChild(m);cap.textContent=f.querySelector("figcaption").textContent;dlg.showModal()}});
+document.getElementById("x").onclick=function(){dlg.close()};
+dlg.addEventListener("click",function(e){if(e.target===dlg)dlg.close()});
+var root=document.documentElement;
+document.getElementById("theme").onclick=function(){var d=root.dataset.theme?root.dataset.theme==="dark":matchMedia("(prefers-color-scheme:dark)").matches;root.dataset.theme=d?"light":"dark"};
+</script>
+</body>
+</html>
