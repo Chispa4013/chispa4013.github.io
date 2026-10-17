@@ -146,27 +146,41 @@ section{padding-bottom:96px}
 .sk .skc h3{margin-bottom:12px;font-size:17px}
 .sk .pills{gap:6px}
 .sk .pills span{padding:3px 11px;font-size:13px}
+.hook{position:absolute;left:-30px;bottom:34px;z-index:2;display:flex;align-items:center;gap:12px;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:16px;padding:11px 14px;box-shadow:var(--sh);text-decoration:none;transition:transform .2s,border-color .2s}
+.hook:hover,.hook:focus-visible{transform:translateY(-3px);border-color:var(--brand)}
+.hook .ht{display:flex;flex-direction:column;line-height:1.25}
+.hook b{font-family:Raleway,sans-serif;font-size:15px}
+.hook small{color:var(--mute);font-size:12px}
+.hook svg{width:18px;height:18px;fill:none;stroke:var(--brand);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s}
+.hook:hover svg{transform:translateX(3px)}
+.eq{display:flex;align-items:flex-end;gap:3px;height:24px}
+.eq i{width:4px;height:30%;border-radius:2px;background:var(--brand);animation:eq 1.2s ease-in-out infinite}
+.eq i:nth-child(2){animation-delay:-.35s}.eq i:nth-child(3){animation-delay:-.7s}.eq i:nth-child(4){animation-delay:-.2s}.eq i:nth-child(5){animation-delay:-.55s}
+.hook:hover .eq i{animation-duration:.55s}
+@keyframes eq{0%,100%{height:25%}50%{height:100%}}
+@media (prefers-reduced-motion:reduce){.eq i{animation:none;height:60%}}
+@media (max-width:760px){.hook{left:-14px;bottom:26px;padding:9px 12px}}
 </style>
 </head>
 <body>
 <header class="bar"><div class="wrap">
 <a class="brand" href="#inicio" aria-label="Javier Senabre Urrea, inicio"><svg viewBox="0 0 32 32" aria-hidden="true"><g fill="currentColor"><ellipse cx="15" cy="18" rx="8.5" ry="4.2" transform="rotate(-18 15 18)"/><circle cx="23.5" cy="13.5" r="3.2"/><path d="M26 12.2l5 1.9-5 1.6z"/><path d="M12 16.5C10.5 9 16 4.5 24.5 4 20.5 7 19.5 11 19.5 16z"/><path d="M8.5 19.5L1.5 21.5 4 23.5 1.8 26.5 9.5 22.5z"/></g><circle cx="24.3" cy="12.7" r=".7" style="fill:var(--brand)"/></svg></a>
-<nav><a class="h" href="#proyectos">Proyectos</a><a class="h" href="#trayectoria">Trayectoria</a><a class="h" href="#skills">Habilidades</a><a class="h" href="#idiomas">Idiomas</a><a class="h" href="#aves">Aves</a>
+<nav><a class="h" href="#proyectos">Proyectos</a><a class="h" href="#trayectoria">Trayectoria</a><a class="h" href="#skills">Habilidades</a><a class="h" href="#idiomas">Idiomas y más</a><a class="h" href="#aves">Aves</a>
 <button class="theme" id="theme" aria-label="Cambiar tema">◐</button></nav>
 </div></header>
 <nav class="dots" aria-label="Secciones">
-<a href="#inicio" data-l="Inicio" aria-label="Inicio"></a><a href="#proyectos" data-l="Proyectos" aria-label="Proyectos"></a><a href="#trayectoria" data-l="Trayectoria" aria-label="Trayectoria"></a><a href="#skills" data-l="Habilidades" aria-label="Habilidades"></a><a href="#idiomas" data-l="Idiomas" aria-label="Idiomas"></a><a href="#aves" data-l="Aves" aria-label="Aves"></a>
+<a href="#inicio" data-l="Inicio" aria-label="Inicio"></a><a href="#proyectos" data-l="Proyectos" aria-label="Proyectos"></a><a href="#trayectoria" data-l="Trayectoria" aria-label="Trayectoria"></a><a href="#skills" data-l="Habilidades" aria-label="Habilidades"></a><a href="#idiomas" data-l="Idiomas y más" aria-label="Idiomas y otros datos relevantes"></a><a href="#aves" data-l="Aves" aria-label="Aves"></a>
 </nav>
 
 <main>
 <section id="inicio"><div class="wrap hero">
 <div>
 <h1>Javier Senabre Urrea</h1>
-<p class="role">Ingeniero informático · IA, machine learning y análisis de datos</p>
-<p class="lead">Trabajo en proyectos de clasificación, clustering y deep learning. Me interesa aplicar IA y ciencia de datos a problemas reales para generar valor a partir de los datos.</p>
+<p class="role">Ingeniero informático · IA, datos y desarrollo de software</p>
+<p class="lead">Soy ingeniero informático y desarrollador. Trabajo con inteligencia artificial y análisis de datos, y he desarrollado aplicaciones web, chatbots y videojuegos de realidad virtual. Me interesa resolver problemas reales y generar valor a partir de los datos.</p>
 <div class="cta"><a class="btn p" href="#proyectos">Ver proyectos</a><a class="btn s" href="https://github.com/Chispa4013" target="_blank" rel="noopener">GitHub</a></div>
 </div>
-<div class="photo"><img src="Images/javier.jpg" alt="Javier Senabre con un telescopio terrestre en un entorno natural"></div>
+<div class="photo"><img src="Images/javier.jpg" alt="Javier Senabre con un telescopio terrestre en un entorno natural"><a class="hook" href="#aves" aria-label="Ir a mi afición: observación y grabación de aves"><span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span class="ht"><b>Observo y grabo aves</b><small>Ver mi afición</small></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
 </div></section>
 
 <section id="proyectos"><div class="wrap">
@@ -211,8 +225,8 @@ section{padding-bottom:96px}
 </div></section>
 
 <section id="idiomas"><div class="wrap">
-<h2>Idiomas</h2>
-<p class="sub">Niveles según el Marco Común Europeo de Referencia.</p>
+<h2>Idiomas y otros datos relevantes</h2>
+<p class="sub">Niveles de idioma según el Marco Común Europeo de Referencia y otros datos de interés.</p>
 <div class="lang">
 <div class="skc"><div class="lh"><h3 style="margin:0">Español</h3><span class="lv">Nativo</span></div>
 <div class="scale" role="img" aria-label="Lengua nativa"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
