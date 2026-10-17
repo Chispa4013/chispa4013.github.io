@@ -160,6 +160,22 @@ section{padding-bottom:96px}
 @keyframes eq{0%,100%{height:25%}50%{height:100%}}
 @media (prefers-reduced-motion:reduce){.eq i{animation:none;height:60%}}
 @media (max-width:760px){.hook{left:-14px;bottom:26px;padding:9px 12px}}
+.fav{display:grid;grid-template-columns:minmax(0,340px) 1fr;gap:28px;align-items:center;padding:18px;margin-bottom:28px;border-radius:22px;border:2px solid transparent;background:linear-gradient(var(--surface),var(--surface)) padding-box,linear-gradient(135deg,#43669a,#3f9d7a 55%,#8a5fb3) border-box;box-shadow:var(--sh)}
+.favimg{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:4/3;background:linear-gradient(135deg,#43669a,#3f9d7a 60%,#8a5fb3);display:grid;place-items:center}
+.favimg .ph{width:42%;color:#fff;opacity:.92}
+.favimg .ph svg{display:block;width:100%}
+.favimg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.favimg.noimg img{display:none}
+.badge{display:inline-flex;align-items:center;gap:6px;background:var(--soft);color:var(--brand);font-weight:500;font-size:13px;padding:4px 12px;border-radius:999px;margin-bottom:12px}
+.badge svg{width:14px;height:14px;fill:currentColor}
+.favtx h3{font-size:clamp(28px,4vw,40px);font-weight:800;margin-bottom:10px}
+.favtx p{margin:0;color:var(--mute);max-width:52ch}
+@media (max-width:760px){.fav{grid-template-columns:1fr;gap:18px}}
+.hook::before{content:"";position:absolute;inset:-2px;border-radius:17px;border:2px solid var(--brand);opacity:0;pointer-events:none;animation:ping 2.4s ease-out infinite}
+@keyframes ping{0%{transform:scale(1);opacity:.6}70%,100%{transform:scale(1.1,1.4);opacity:0}}
+.hook svg{animation:nudge 1.6s ease-in-out infinite}
+@keyframes nudge{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}
+@media (prefers-reduced-motion:reduce){.hook::before,.hook svg{animation:none}}
 </style>
 </head>
 <body>
@@ -177,10 +193,10 @@ section{padding-bottom:96px}
 <div>
 <h1>Javier Senabre Urrea</h1>
 <p class="role">Ingeniero informático · IA, datos y desarrollo de software</p>
-<p class="lead">Soy ingeniero informático y desarrollador. Trabajo con inteligencia artificial y análisis de datos, y he desarrollado aplicaciones web, chatbots y videojuegos de realidad virtual. Me interesa resolver problemas reales y generar valor a partir de los datos.</p>
+<p class="lead">Soy ingeniero informático. Trabajo con inteligencia artificial y análisis de datos para resolver problemas reales. También, desarrollo software con estas herramientas.</p>
 <div class="cta"><a class="btn p" href="#proyectos">Ver proyectos</a><a class="btn s" href="https://github.com/Chispa4013" target="_blank" rel="noopener">GitHub</a></div>
 </div>
-<div class="photo"><img src="Images/javier.jpg" alt="Javier Senabre con un telescopio terrestre en un entorno natural"><a class="hook" href="#aves" aria-label="Ir a mi afición: observación y grabación de aves"><span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span class="ht"><b>Observo y grabo aves</b><small>Ver mi afición</small></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+<div class="photo"><img src="Images/javier.jpg" alt="Javier Senabre con un telescopio terrestre en un entorno natural"><a class="hook" href="#aves" aria-label="Descubre mi pájaro favorito en la sección de mi afición"><span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span class="ht"><b>¿Cuál es mi pájaro favorito?</b><small>Descúbrelo en mi afición</small></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
 </div></section>
 
 <section id="proyectos"><div class="wrap">
@@ -242,6 +258,7 @@ section{padding-bottom:96px}
 <section id="aves"><div class="wrap">
 <h2>Observación y grabación de aves</h2>
 <p class="sub">Mi afición fuera de la pantalla: salir al campo a observar y grabar pájaros. De ahí nació mi TFG sobre clasificación de aves por su canto, y sigue alimentando mis proyectos de audio.</p>
+<div class="fav" id="estornino"><div class="favimg"><span class="ph"><svg viewBox="0 0 32 32" aria-hidden="true"><g fill="currentColor"><ellipse cx="15" cy="18" rx="8.5" ry="4.2" transform="rotate(-18 15 18)"/><circle cx="23.5" cy="13.5" r="3.2"/><path d="M26 12.2l5 1.9-5 1.6z"/><path d="M12 16.5C10.5 9 16 4.5 24.5 4 20.5 7 19.5 11 19.5 16z"/><path d="M8.5 19.5L1.5 21.5 4 23.5 1.8 26.5 9.5 22.5z"/></g></svg></span><img src="Images/estornino.jpg" alt="Un estornino" loading="lazy" decoding="async" onerror="this.parentNode.classList.add('noimg')"></div><div class="favtx"><span class="badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg>Mi pájaro favorito</span><h3>El estornino negro</h3><p>Famoso por su plumaje negro de reflejos iridiscentes, su canto lleno de imitaciones de otros sonidos y sus espectaculares bandadas en vuelo.</p></div></div>
 <div class="tabs" id="tabs" role="group" aria-label="Filtrar galería"></div>
 <p class="sub" id="galmsg" role="status"></p>
 <div class="gal" id="gal"></div>
@@ -276,7 +293,7 @@ return o+'</svg>'}
 function chat(){return '<svg viewBox="0 0 320 240" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="28" y="34" width="150" height="42" rx="14" fill="var(--line)"/><rect x="44" y="50" width="90" height="8" rx="4" fill="var(--mute)" opacity=".5"/><rect x="132" y="92" width="160" height="52" rx="14" fill="var(--brand)"/><rect x="148" y="108" width="110" height="8" rx="4" fill="var(--brand-ink)" opacity=".8"/><rect x="148" y="123" width="70" height="8" rx="4" fill="var(--brand-ink)" opacity=".5"/><rect x="28" y="160" width="120" height="42" rx="14" fill="var(--line)"/><circle cx="62" cy="181" r="4.5" fill="var(--mute)"/><circle cx="80" cy="181" r="4.5" fill="var(--mute)" opacity=".7"/><circle cx="98" cy="181" r="4.5" fill="var(--mute)" opacity=".4"/></svg>'}
 function vr(){return '<svg viewBox="0 0 320 240" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M40 118Q160 60 280 118" fill="none" stroke="var(--mute)" stroke-width="10" stroke-linecap="round" opacity=".5"/><rect x="70" y="92" width="180" height="92" rx="26" fill="var(--brand)"/><circle cx="125" cy="138" r="26" fill="var(--brand-ink)" opacity=".92"/><circle cx="195" cy="138" r="26" fill="var(--brand-ink)" opacity=".92"/><circle cx="125" cy="138" r="11" fill="var(--brand)"/><circle cx="195" cy="138" r="11" fill="var(--brand)"/></svg>'}
 var projects=[
-{t:"Clustering en balonmano de alto rendimiento",m:"TFM · Máster en Ingeniería Informática",img:scatter,tags:["Python","Machine learning","Clustering"],d:"Caracterización de jugadores de élite con datos de la EHF mediante clustering (K-Means, Ward, DBSCAN) y clasificación supervisada (Random Forest, XGBoost, SVM, MLP), con interpretabilidad SHAP. El agrupamiento coincide en torno al 80 % con las nominaciones a MVP.",l:"https://github.com/Chispa4013/TFM_Software_Javier_Senabre_Urrea",doc:"docs/TFM_Javier_Senabre.pdf"},
+{t:"Clustering en balonmano de alto rendimiento",m:"TFM · Máster en Ingeniería Informática",img:scatter,tags:["Python","Machine learning","Clustering"],d:"Caracterización de jugadores de élite con datos de la EHF mediante clustering (K-Means, Ward, DBSCAN) y clasificación supervisada (Random Forest, XGBoost, SVM, MLP) con interpretabilidad SHAP.",l:"https://github.com/Chispa4013/TFM_Software_Javier_Senabre_Urrea",doc:"docs/TFM_Javier_Senabre.pdf"},
 {t:"Clasificación automática de pájaros según su canto",m:"TFG · Grado en Ingeniería Informática",img:function(){return spec(41,false)},tags:["Python","Deep learning","Audio"],d:"Sistema que identifica especies de aves a partir de grabaciones de su canto, usando aprendizaje automático sobre audio.",l:"https://github.com/Chispa4013/TFG-Software",doc:"docs/TFG_Javier_Senabre.pdf"},
 {t:"Generación artificial de cantos de aves",m:"Proyecto en desarrollo",img:function(){return spec(5,true)},tags:["Python","Deep learning","Audio","IA generativa"],d:"Generación de cantos a partir de mel-espectrogramas con modelos de difusión, con grabaciones de Xeno-canto como base de datos.",l:""},
 {t:"Chatbot para Panadero SL",m:"Experiencia profesional · 3 meses",img:chat,tags:["Chatbot","API REST", "n8n", "Ingeniería de requisitos", "Test", "Automatización"],d:"Desarrollo de un chatbot como ingeniero informático en la empresa.",l:""},
