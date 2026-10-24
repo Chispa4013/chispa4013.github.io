@@ -9,6 +9,9 @@
 <meta charset="utf-8">
 <meta name="author" content="Javier Senabre Urrea">
 <link rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.es">
+<meta name="description" content="Portafolio de Javier Senabre Urrea: ingeniero informático especializado en IA, datos y desarrollo de software.">
+<meta name="theme-color" content="#f1f4ec" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b1410" media="(prefers-color-scheme: dark)">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Javier Senabre Urrea · Portafolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -206,21 +209,32 @@ section:not(#inicio):not(#aves)::after{content:"";position:absolute;top:24px;rig
 section:nth-of-type(even):not(#aves)::after{right:auto;left:0;transform:scaleX(-1)}
 @media (max-width:760px){section:not(#inicio):not(#aves)::after{width:180px;height:132px;-webkit-mask-size:180px 132px;mask-size:180px 132px;opacity:.12}}
 
-:root{--ray:rgba(255,226,150,.3);--mist:rgba(255,255,255,.4)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ray:rgba(150,205,175,.08);--mist:rgba(127,194,155,.07)}}
-:root[data-theme="dark"]{--ray:rgba(150,205,175,.08);--mist:rgba(127,194,155,.07)}
-.bg{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+:root{--ray:rgba(255,226,150,.3);--mist:rgba(255,255,255,.4);--water:#3d86ad;--crop:#b8933a;--rock:#6b7a8a;--dry:#a8934a;--ripple:rgba(255,255,255,.7)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ray:rgba(150,205,175,.08);--mist:rgba(127,194,155,.07);--water:#5aa3c7;--crop:#d7b25e;--rock:#9fb2c4;--dry:#c9b06a;--ripple:rgba(200,230,255,.5)}}
+:root[data-theme="dark"]{--ray:rgba(150,205,175,.08);--mist:rgba(127,194,155,.07);--water:#5aa3c7;--crop:#d7b25e;--rock:#9fb2c4;--dry:#c9b06a;--ripple:rgba(200,230,255,.5)}
+.bg{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;contain:layout paint style}
 .bg canvas{position:absolute;inset:0;width:100%;height:100%}
-.ly{position:absolute;left:-6%;width:112%;bottom:0;color:var(--brand);transform:translate3d(calc(var(--p,0)*var(--dx,0px)),calc(var(--p,0)*var(--dy,0px)),0);will-change:transform}
+.scenes,.scene{position:absolute;inset:0}
+.scene{opacity:0;visibility:hidden;transition:opacity 1.3s ease,visibility 0s 1.3s}
+.scene.on{opacity:1;visibility:visible;transition:opacity 1.3s ease}
+.scene:not(.on) *{animation-play-state:paused}
+.rip{animation:wv var(--d,8s) ease-in-out infinite alternate}
+@keyframes wv{from{transform:translateX(-16px)}to{transform:translateX(16px)}}
+.sc-lago .l1{opacity:.1}.sc-lago .l3{opacity:.34}.sc-lago .l4{opacity:.2}
+.sc-cultivos .l1{opacity:.09}.sc-cultivos .l2{opacity:.14}.sc-cultivos .l3{opacity:.22}.sc-cultivos .l4{opacity:.3}
+.sc-montana .l1{opacity:.16}.sc-montana .l2{opacity:.14}.sc-montana .l3{opacity:.17}
+.sc-dehesa .l1{opacity:.13}.sc-dehesa .l2{opacity:.13}.sc-dehesa .l4{opacity:.28}
+.ly{position:absolute;left:-6%;width:112%;bottom:0;color:var(--brand);will-change:transform}
 .ly svg{display:block;width:100%;height:100%;fill:currentColor;overflow:visible}
-.l1{height:50vh;opacity:.07;--dx:-18px;--dy:14px}
-.l2{height:42vh;opacity:.11;--dx:-36px;--dy:26px}
-.l3{height:34vh;opacity:.17;--dx:-64px;--dy:44px}
-.l4{height:15vh;opacity:.22;--dx:-96px;--dy:60px}
-.sw{transform-box:fill-box;transform-origin:50% 100%;animation:tsway var(--d,6s) ease-in-out infinite alternate}
-@keyframes tsway{from{transform:rotate(-.9deg)}to{transform:rotate(.9deg)}}
-.l4 .sw{animation-name:gsway}
-@keyframes gsway{from{transform:skewX(-3.5deg)}to{transform:skewX(3.5deg)}}
+.l1{height:50vh;opacity:.07}
+.l2{height:42vh;opacity:.11}
+.l3{height:34vh;opacity:.17}
+.l4{height:15vh;opacity:.22}
+.sgw,.rip{position:absolute;inset:0;will-change:transform}
+.sgw{transform-origin:50% 100%;animation:tsway var(--d,6s) ease-in-out infinite alternate}
+.sgw.g{animation-name:gsway}
+@keyframes tsway{from{transform:skewX(-1deg)}to{transform:skewX(1deg)}}
+@keyframes gsway{from{transform:skewX(-3deg)}to{transform:skewX(3deg)}}
 .rays{position:absolute;inset:0;overflow:hidden}
 .rays i{position:absolute;top:-20%;right:var(--rx);width:var(--rw);height:140%;background:linear-gradient(180deg,var(--ray),transparent 70%);transform-origin:50% 0;filter:blur(12px);animation:ray 11s ease-in-out infinite alternate}
 .rays i:nth-child(1){--rx:4%;--rw:14vw}
@@ -263,14 +277,74 @@ footer.lic summary{cursor:pointer;color:var(--brand);margin:0 0 10px}
 footer.lic pre{white-space:pre-wrap;font:12.5px/1.55 ui-monospace,Menlo,Consolas,monospace;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;max-width:82ch;margin:0 0 14px;color:var(--mute)}
 footer.lic .fine{font-size:13px}
 @media (prefers-reduced-motion:reduce){.bg *,.asst *,.dock.hl .ib{animation:none!important}.ly{transform:none}}
+
+.cvm{position:relative}
+.cvb{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:10px;border:1px solid var(--brand);background:var(--brand);color:var(--brand-ink);font:inherit;font-weight:600;font-size:14px;cursor:pointer}
+.cvb svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.cvpop{position:absolute;right:0;top:100%;padding-top:8px;display:none;min-width:176px;filter:drop-shadow(0 8px 16px rgba(0,0,0,.16))}
+.cvm.open .cvpop,.cvm:focus-within .cvpop{display:block}
+.cvpop a{display:flex;justify-content:space-between;gap:16px;padding:10px 14px;background:var(--surface);border:1px solid var(--line);color:var(--ink);font-size:14px}
+.cvpop a:first-child{border-radius:12px 12px 0 0}
+.cvpop a:last-child{border-radius:0 0 12px 12px;border-top:0}
+.cvpop a:hover{background:var(--soft);color:var(--ink)}
+.cvpop small{color:var(--mute)}
+.lng{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--surface)}
+.lng button{border:0;background:transparent;color:var(--mute);font:inherit;font-size:13px;font-weight:600;padding:0 10px;height:34px;cursor:pointer}
+.lng button[aria-pressed="true"]{background:var(--brand);color:var(--brand-ink)}
+@media (max-width:760px){header.bar nav{gap:10px}}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{overflow-x:clip}
+.wrap{padding-left:max(24px,env(safe-area-inset-left));padding-right:max(24px,env(safe-area-inset-right))}
+@media (max-width:760px){
+.wrap{padding-left:max(18px,env(safe-area-inset-left));padding-right:max(18px,env(safe-area-inset-right))}
+header.bar .wrap{height:56px;gap:10px}
+.brand{width:36px;height:36px}.brand svg{width:28px;height:28px}
+.cvb,.theme{height:40px}.theme{width:40px}
+.lng button{height:38px;padding:0 11px}
+section,footer{min-height:auto;padding:68px 0 40px}
+#inicio{min-height:calc(100svh - 56px);padding:24px 0 40px}
+.hero{gap:30px}
+.hero h1{font-size:clamp(34px,10.5vw,46px)}
+.hero .lead{margin-bottom:22px}
+.cta .btn{flex:1 1 calc(50% - 6px);text-align:center;min-height:44px;padding:12px 14px}
+.cta .btn.p{flex-basis:100%}
+.photo{width:min(72%,260px);margin:0 auto}
+section h2{font-size:clamp(25px,7vw,30px)}
+.sub{margin-bottom:22px}
+.chip{padding:9px 14px;min-height:40px}
+.proj{padding:12px;gap:16px}
+.pimg{aspect-ratio:16/10}
+.pbody{padding:2px 4px 4px}
+.pbody .btn{padding:10px 14px;min-height:42px}
+.tr{grid-template-columns:1fr;gap:34px}
+.sk,.lang{grid-template-columns:1fr}
+.skc{padding:18px}
+.gal{grid-template-columns:repeat(2,1fr);grid-auto-rows:150px;gap:10px}
+.gal .big{grid-column:span 2;grid-row:span 1}
+.fav{padding:14px}
+.lv{font-size:26px}
+.dock{right:max(12px,env(safe-area-inset-right))}
+.asst{left:max(10px,env(safe-area-inset-left))}
+dialog{max-width:94vw}
+dialog .lb{max-height:70vh}
+footer.lic{padding:44px 0 128px}
+.toast{top:calc(64px + env(safe-area-inset-top,0px))}
+.rays i:nth-child(n+2){display:none}
+.rays i{filter:none}
+}
+@media (max-width:380px){.cvb{padding:0 9px}.cvb svg{display:none}header.bar nav{gap:6px}.cta .btn{flex-basis:100%}}
+@media (max-height:480px) and (orientation:landscape){section,footer{padding:64px 0 32px}#inicio{min-height:auto}.ob{width:54px}.hero{grid-template-columns:1fr 200px;gap:24px}.photo{order:0;width:200px;margin:0}}
+@media (hover:none){.proj:hover,.skc:hover,.btn:hover,.ib:hover{transform:none}.gal figure:hover img,.gal figure:hover svg{transform:none}}
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
 </head>
 <body>
-<div class="bg" id="bg" aria-hidden="true"><div class="rays"><i></i><i></i><i></i></div><div class="ly l1"></div><div class="mist m1"></div><div class="ly l2"></div><div class="ly l3"></div><div class="mist m2"></div><div class="ly l4"></div><canvas id="sky"></canvas></div>
+<div class="bg" id="bg" aria-hidden="true"><div class="rays"><i></i><i></i><i></i></div><div class="scenes" id="scenes"></div><canvas id="sky"></canvas><div class="scenes fg" id="fgs"></div></div>
 <header class="bar"><div class="wrap">
 <a class="brand" href="#inicio" aria-label="Javier Senabre Urrea, inicio"><svg viewBox="0 0 32 32" aria-hidden="true"><g fill="currentColor"><ellipse cx="15" cy="18" rx="8.5" ry="4.2" transform="rotate(-18 15 18)"/><circle cx="23.5" cy="13.5" r="3.2"/><path d="M26 12.2l5 1.9-5 1.6z"/><path d="M12 16.5C10.5 9 16 4.5 24.5 4 20.5 7 19.5 11 19.5 16z"/><path d="M8.5 19.5L1.5 21.5 4 23.5 1.8 26.5 9.5 22.5z"/></g><circle cx="24.3" cy="12.7" r=".7" style="fill:var(--brand)"/></svg></a>
 <nav><a class="h" href="#proyectos">Proyectos</a><a class="h" href="#trayectoria">Trayectoria</a><a class="h" href="#skills">Habilidades</a><a class="h" href="#idiomas">Idiomas y más</a><a class="h" href="#aves">Aves</a>
+<div class="cvm"><button class="cvb" id="cvbtn" type="button" aria-expanded="false" aria-haspopup="true" aria-label="Descargar CV">CV<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v10M7 10l5 5 5-5M5 19h14"/></svg></button><div class="cvpop"><a href="docs/CV_Javier_Senabre_ES.pdf" download>Español<small>PDF</small></a><a href="docs/CV_Javier_Senabre_EN.pdf" download>English<small>PDF</small></a></div></div>
+<div class="lng" role="group" aria-label="Idioma"><button type="button" data-lang="es" aria-pressed="true">ES</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div>
 <button class="theme" id="theme" aria-label="Cambiar tema">◐</button></nav>
 </div></header>
 <nav class="dots" aria-label="Secciones">
@@ -284,9 +358,9 @@ footer.lic .fine{font-size:13px}
 <h1>Javier Senabre Urrea</h1>
 <p class="role">Ingeniero informático · IA, datos y desarrollo de software</p>
 <p class="lead">Soy ingeniero informático. Trabajo con inteligencia artificial y análisis de datos para resolver problemas reales. También, desarrollo software con estas herramientas.</p>
-<div class="cta"><a class="btn p" href="#proyectos">Ver proyectos</a><a class="btn s" href="https://github.com/Chispa4013" target="_blank" rel="noopener">GitHub</a></div>
+<div class="cta"><a class="btn p" href="#proyectos">Ver proyectos</a><a class="btn s" href="https://github.com/Chispa4013" target="_blank" rel="noopener">GitHub</a><a class="btn s" id="cvlink" href="docs/CV_Javier_Senabre_ES.pdf" download>Descargar CV</a></div>
 </div>
-<div class="photo"><img src="Images/javier.jpg" alt="Javier Senabre con un telescopio terrestre en un entorno natural"><a class="hook" href="#aves" aria-label="Descubre mi pájaro favorito en la sección de mi afición"><span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span class="ht"><b>¿Cuál es mi pájaro favorito?</b><small>Descúbrelo en mi afición</small></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+<div class="photo"><img fetchpriority="high" decoding="async" src="Images/javier.jpg" alt="Javier Senabre con un telescopio terrestre en un entorno natural"><a class="hook" href="#aves" aria-label="Descubre mi pájaro favorito en la sección de mi afición"><span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span class="ht"><b>¿Cuál es mi pájaro favorito?</b><small>Descúbrelo en mi afición</small></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
 </div></section>
 
 <section id="proyectos"><div class="wrap">
@@ -396,6 +470,31 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 <dialog id="dlg"><div class="lb" id="lb"></div><p><span id="cap"></span><button id="x">Cerrar</button></p></dialog>
 
 <script>
+var EN={"Javier Senabre Urrea · Portafolio":"Javier Senabre Urrea · Portfolio","Javier Senabre Urrea, inicio":"Javier Senabre Urrea, home","Cambiar tema":"Toggle theme","Secciones":"Sections","Inicio":"Home","Proyectos":"Projects","Trayectoria":"Career","Habilidades":"Skills","Idiomas y más":"Languages & more","Idiomas y otros datos relevantes":"Languages and other relevant details","Aves":"Birds","Idioma":"Language","Descargar CV":"Download CV","Ingeniero informático · IA, datos y desarrollo de software":"Computer engineer · AI, data and software development","Soy ingeniero informático. Trabajo con inteligencia artificial y análisis de datos para resolver problemas reales. También, desarrollo software con estas herramientas.":"I am a computer engineer. I work with artificial intelligence and data analysis to solve real problems. I also develop software with these tools.","Ver proyectos":"View projects","Javier Senabre con un telescopio terrestre en un entorno natural":"Javier Senabre with a spotting scope in a natural setting","Descubre mi pájaro favorito en la sección de mi afición":"Discover my favourite bird in my hobby section","¿Cuál es mi pájaro favorito?":"What is my favourite bird?","Descúbrelo en mi afición":"Find out in my hobby section","Filtra por tecnología para ver solo los que te interesan.":"Filter by technology to see only the ones you care about.","Filtrar proyectos":"Filter projects","Todos":"All","Formación y experiencia profesional.":"Education and professional experience.","Estudios":"Education","Máster en Ingeniería Informática (MUII)":"Master's Degree in Computer Engineering (MUII)","Universidad de Castilla-La Mancha, Albacete · 2024–2026":"University of Castilla-La Mancha, Albacete · 2024–2026","Universidad de Castilla-La Mancha, Albacete · 2020–2024":"University of Castilla-La Mancha, Albacete · 2020–2024","TFM: Clustering en balonmano de alto rendimiento":"Master's thesis: Clustering in high-performance handball","Grado en Ingeniería Informática":"Bachelor's Degree in Computer Engineering","TFG: Clasificación automática de pájaros según su canto":"Bachelor's thesis: Automatic classification of birds by their song","Experiencia laboral":"Work experience","Ingeniero informático · Panadero SL":"Computer engineer · Panadero SL","3 meses":"3 months","Desarrollo de un chatbot para la empresa.":"Development of a chatbot for the company.","Análisis y definición de los requisitos del chatbot.":"Analysis and definition of the chatbot requirements.","Automatización de procesos con n8n y uso de API REST.":"Process automation with n8n and use of REST APIs.","Pruebas (testing) del funcionamiento del chatbot.":"Testing of the chatbot's operation.","Ingeniería de requisitos":"Requirements engineering","Automatización":"Automation","Desarrollador de videojuegos de realidad virtual · Cerebroom VR Games":"Virtual reality game developer · Cerebroom VR Games","2 meses · Albacete":"2 months · Albacete","Desarrollo de videojuegos de realidad virtual en C#.":"Development of virtual reality games in C#.","Trabajo en equipo con metodología SCRUM.":"Teamwork using the SCRUM methodology.","Realidad virtual":"Virtual reality","Trabajo en equipo":"Teamwork","Lo que uso para convertir datos en soluciones.":"What I use to turn data into solutions.","Deep learning y audio":"Deep learning and audio","Librerías de ML":"ML libraries","Análisis y visualización":"Analysis and visualisation","Lenguajes":"Languages","Datos, cloud y web":"Data, cloud and web","Ingeniería de software":"Software engineering","Herramientas":"Tools","Competencias":"Soft skills","Clasificación supervisada":"Supervised classification","PCA y t-SNE":"PCA and t-SNE","Ajuste de hiperparámetros":"Hyperparameter tuning","Interpretabilidad de modelos":"Model interpretability","Redes convolucionales (CNN)":"Convolutional networks (CNN)","Aumento de datos":"Data augmentation","Espectrogramas mel":"Mel spectrograms","Procesamiento de audio":"Audio processing","Análisis de datos":"Data analysis","HTML y CSS":"HTML and CSS","Metodología SCRUM":"SCRUM methodology","Algoritmos":"Algorithms","Computación":"Computing","Creatividad":"Creativity","Adaptabilidad":"Adaptability","Niveles de idioma según el Marco Común Europeo de Referencia y otros datos de interés.":"Language levels according to the Common European Framework of Reference and other relevant details.","Español":"Spanish","Nativo":"Native","Lengua nativa":"Native language","Inglés":"English","Nivel B1 en una escala de A1 a C2":"Level B1 on a scale from A1 to C2","Más información":"More information","Curso de computación cuántica (UCLM)":"Quantum computing course (UCLM)","Permiso B de conducir":"Category B driving licence","Observación y grabación de aves":"Bird watching and recording","Mi afición fuera de la pantalla: salir al campo a observar y grabar pájaros. De ahí nació mi TFG sobre clasificación de aves por su canto, y sigue alimentando mis proyectos de audio.":"My hobby away from the screen: heading out into the countryside to watch and record birds. My bachelor's thesis on bird classification by song came from it, and it still feeds my audio projects.","Mi pájaro favorito":"My favourite bird","El estornino negro":"The spotless starling","Un estornino":"A starling","Famoso por su plumaje negro de reflejos iridiscentes, su canto lleno de imitaciones de otros sonidos y sus espectaculares bandadas en vuelo.":"Famous for its black plumage with iridescent sheen, its song full of imitations of other sounds and its spectacular flocks in flight.","Filtrar galería":"Filter gallery","Todo":"All","Fotos":"Photos","Vídeos":"Videos","Sonogramas":"Sonograms","Reproducir: ":"Play: ","Ampliar: ":"Enlarge: ","Pronto añadiré aquí mis fotos y vídeos de campo.":"I will soon add my field photos and videos here.","Cargando galería…":"Loading gallery…","Los textos, las fotografías, los vídeos, las grabaciones y el diseño de este portafolio se publican bajo la licencia":"The texts, photographs, videos, recordings and design of this portfolio are published under the license","Creative Commons Atribución-NoComercial-SinDerivadas 4.0 Internacional (CC BY-NC-ND 4.0)":"Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)",". El código fuente de esta página se distribuye bajo la licencia MIT.":". The source code of this page is distributed under the MIT license.","Ver el texto de la licencia MIT":"View the MIT license text","Tipografías Raleway, Rubik y Fraunces de Google Fonts, bajo licencia SIL Open Font License 1.1.":"Typefaces Raleway, Rubik and Fraunces from Google Fonts, under the SIL Open Font License 1.1.","Contacto":"Contact","Correo electrónico":"Email","Teléfono":"Phone","Copiar":"Copy","Copiado":"Copied","Correo copiado al portapapeles":"Email copied to clipboard","Teléfono copiado al portapapeles":"Phone number copied to clipboard","Enlace de GitHub copiado al portapapeles":"GitHub link copied to clipboard","No se pudo copiar, selecciona el texto manualmente":"Could not copy, please select the text manually","Cerrar":"Close","Ver documentación":"View documentation","Ver código en GitHub":"View code on GitHub","No hay proyectos con esa etiqueta.":"No projects with that tag.","TFM · Máster en Ingeniería Informática":"Master's thesis · Master's Degree in Computer Engineering","TFG · Grado en Ingeniería Informática":"Bachelor's thesis · Bachelor's Degree in Computer Engineering","Proyecto en desarrollo":"Project in progress","Experiencia profesional · 3 meses":"Professional experience · 3 months","Cerebroom VR Games · 2 meses":"Cerebroom VR Games · 2 months","Clustering en balonmano de alto rendimiento":"Clustering in high-performance handball","Clasificación automática de pájaros según su canto":"Automatic classification of birds by their song","Generación artificial de cantos de aves":"Artificial generation of bird songs","Chatbot para Panadero SL":"Chatbot for Panadero SL","Videojuego de realidad virtual":"Virtual reality game","Caracterización de jugadores de élite con datos de la EHF mediante clustering (K-Means, Ward, DBSCAN) y clasificación supervisada (Random Forest, XGBoost, SVM, MLP) con interpretabilidad SHAP.":"Characterisation of elite players using EHF data through clustering (K-Means, Ward, DBSCAN) and supervised classification (Random Forest, XGBoost, SVM, MLP) with SHAP interpretability.","Sistema que identifica especies de aves a partir de grabaciones de su canto, usando aprendizaje automático sobre audio.":"System that identifies bird species from recordings of their song, using machine learning on audio.","Generación de cantos a partir de mel-espectrogramas con modelos de difusión, con grabaciones de Xeno-canto como base de datos.":"Generation of songs from mel spectrograms with diffusion models, using Xeno-canto recordings as the dataset.","Desarrollo de un chatbot como ingeniero informático en la empresa.":"Development of a chatbot as a computer engineer at the company.","Desarrollo de videojuegos de realidad virtual en equipo, con metodología SCRUM.":"Team development of virtual reality games using the SCRUM methodology.","Arduino y ESP32":"Arduino and ESP32","IA generativa":"Generative AI","Test":"Testing","Asistente estornino":"Starling assistant","Asistente estornino: pulsa para abrir el menú de ayuda":"Starling assistant: press to open the help menu","Idiomas":"Languages","Dato curioso":"Fun fact","Jugar con ellos":"Play with them","Llamar a la bandada":"Call the flock","¿Qué te enseño? Elige una opción o pide un dato curioso.":"What shall I show you? Pick an option or ask for a fun fact.","¡Prrr-tiu! Soy el estornino del bosque, el guía de este portafolio. Pulsa sobre mí.":"Prrr-tiu! I'm the forest starling, your guide to this portfolio. Tap me.","Estos son los proyectos de Javier. Puedes filtrarlos por tecnología con las etiquetas.":"Here are Javier's projects. You can filter them by technology using the tags.","Estudios y experiencia: el máster, el grado, el chatbot de Panadero SL y los videojuegos de realidad virtual.":"Education and experience: the master's degree, the bachelor's degree, the Panadero SL chatbot and the virtual reality games.","Machine learning, deep learning y audio, análisis de datos, cloud y desarrollo, agrupado por áreas.":"Machine learning, deep learning and audio, data analysis, cloud and development, grouped by area.","Español nativo, inglés B1 y algún dato más.":"Native Spanish, B1 English and a few more details.","La afición de Javier. ¡Y mi sección favorita, claro!":"Javier's hobby. And my favourite section, of course!","Correo, teléfono y GitHub están en los botones de abajo a la derecha. Pulsa uno para copiarlo.":"Email, phone and GitHub are in the buttons at the bottom right. Press one to copy it.","Descargando el CV. Puedes elegir el idioma con el botón «CV» de la cabecera.":"Downloading the CV. You can pick the language with the «CV» button in the header.","Acerca el puntero a las aves y a los animales para desviarlos, y haz clic o toca para asustarlos: huirán más rápido.":"Move the pointer close to the birds and animals to steer them away, and click or tap to scare them: they will run faster.","¡Prrr-tiu, prrr-tiu! Mira cómo vienen.":"Prrr-tiu, prrr-tiu! Look how they come.","¡Prrr-tiu! Los estorninos son grandes imitadores: copian cantos de otras aves e incluso sonidos como timbres o alarmas.":"Prrr-tiu! Starlings are great mimics: they copy the songs of other birds and even sounds like ringtones or alarms.","El estornino negro (Sturnus unicolor) vive en la península ibérica y en el noroeste de África.":"The spotless starling (Sturnus unicolor) lives in the Iberian Peninsula and north-west Africa.","Su plumaje parece negro, pero al sol brilla con reflejos verdes y morados.":"Its plumage looks black, but in the sun it shines with green and purple reflections.","Cuando se juntan miles de estorninos forman una bandada que se retuerce en el aire: una murmuración. Cada ave solo vigila a unos siete vecinos.":"When thousands of starlings gather they form a flock that twists in the air: a murmuration. Each bird only keeps track of about seven neighbours.","El pico del estornino es amarillo en época de cría y oscuro el resto del año.":"The starling's bill is yellow in the breeding season and dark the rest of the year.","El TFG de Javier aprende a reconocer aves por su canto a partir de espectrogramas.":"Javier's bachelor's thesis learns to recognise birds by their song from spectrograms."};
+var LANG="es";
+(function(){var m=/[?&]lang=(es|en)/.exec(location.search),s=null;
+try{s=localStorage.getItem("lang")}catch(e){}
+if(m)LANG=m[1];else if(s==="es"||s==="en")LANG=s;else LANG=((navigator.language||"es").toLowerCase().indexOf("es")===0)?"es":"en"})();
+function tl(s){return LANG==="en"&&EN.hasOwnProperty(s)?EN[s]:s}
+var TXN=[],ATN=[],ATTRS=["aria-label","alt","data-l","data-m","title"];
+(function(){var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,null),n,p,c;
+while((n=w.nextNode())){p=n.parentNode;if(/^(SCRIPT|STYLE|PRE|TEXTAREA)$/.test(p.nodeName)||(p.closest&&p.closest(".cvpop,.cp")))continue;
+c=n.nodeValue.trim();if(c&&EN.hasOwnProperty(c))TXN.push({n:n,s:n.nodeValue,c:c})}
+[].forEach.call(document.querySelectorAll("body *"),function(el){ATTRS.forEach(function(a){var v=el.getAttribute(a);if(v&&EN.hasOwnProperty(v.trim()))ATN.push({e:el,a:a,s:v})})})})();
+function translateStatic(){var en=LANG==="en",a,cl;
+TXN.forEach(function(o){o.n.nodeValue=en?o.s.replace(o.c,function(){return EN[o.c]}):o.s});
+ATN.forEach(function(o){o.e.setAttribute(o.a,en?EN[o.s.trim()]:o.s)});
+document.title=tl("Javier Senabre Urrea · Portafolio");document.documentElement.lang=LANG;
+a=document.querySelector('a[rel~="license"]');if(a)a.setAttribute("href",a.getAttribute("href").replace(/deed\.\w+$/,"deed."+LANG));
+cl=document.getElementById("cvlink");if(cl)cl.setAttribute("href","docs/CV_Javier_Senabre_"+LANG.toUpperCase()+".pdf");
+[].forEach.call(document.querySelectorAll(".lng button"),function(b){b.setAttribute("aria-pressed",String(b.dataset.lang===LANG))});
+[].forEach.call(document.querySelectorAll(".cp"),function(b){b.textContent=tl("Copiar")})}
+function applyLang(l){var m;if(l===LANG)return;LANG=l;try{localStorage.setItem("lang",l)}catch(e){}
+translateStatic();render();tabs();
+m=document.getElementById("galmsg");if(m&&!m.hidden&&m.dataset.k)m.textContent=tl(m.dataset.k);
+[].forEach.call(document.querySelectorAll("#gal figure"),function(f){var b=f.querySelector("button");if(b&&b.dataset.p)b.setAttribute("aria-label",tl(b.dataset.p)+f.dataset.alt)});
+if(window.onLang)window.onLang()}
+translateStatic();
 function rng(s){return function(){s=(s*16807)%2147483647;return s/2147483647}}
 function spec(seed,noisy){
 var r=rng(seed),o='<svg viewBox="0 0 320 240" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="g'+seed+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b1a14"/><stop offset="1" stop-color="#1f4a38"/></linearGradient><filter id="b"><feGaussianBlur stdDeviation="1.4"/></filter></defs><rect width="320" height="240" fill="url(#g'+seed+')"/>';
@@ -421,18 +520,18 @@ var active=null,chips=document.getElementById("chips"),list=document.getElementB
 projects.forEach(function(p){p.tags.forEach(function(x){if(tags.indexOf(x)<0)tags.push(x)})});
 function chip(label,val){var b=document.createElement("button");b.className="chip";b.textContent=label;b.setAttribute("aria-pressed",String(active===val));b.onclick=function(){active=val;render()};return b}
 function render(){
-chips.innerHTML="";chips.appendChild(chip("Todos",null));tags.forEach(function(x){chips.appendChild(chip(x,x))});
+chips.innerHTML="";chips.appendChild(chip(tl("Todos"),null));tags.forEach(function(x){chips.appendChild(chip(tl(x),x))});
 list.innerHTML="";var n=0;
 projects.forEach(function(p){
 if(active&&p.tags.indexOf(active)<0)return;n++;
 var el=document.createElement("article");el.className="proj";
 el.innerHTML='<div class="pimg"></div><div class="pbody"><h3></h3><div class="meta"></div><p></p><div class="tags"></div></div>';
 el.querySelector(".pimg").innerHTML=p.img();
-el.querySelector("h3").textContent=p.t;el.querySelector(".meta").textContent=p.m;el.querySelector("p").textContent=p.d;
-p.tags.forEach(function(x){var s=document.createElement("span");s.className="tag";s.textContent=x;el.querySelector(".tags").appendChild(s)});
-if(p.l||p.doc){var ac=document.createElement("div");ac.className="acts";if(p.doc){var dc=document.createElement("a");dc.className="btn p";dc.href=p.doc;dc.target="_blank";dc.rel="noopener";dc.textContent="Ver documentación";ac.appendChild(dc)}if(p.l){var a=document.createElement("a");a.className="btn s";a.href=p.l;a.target="_blank";a.rel="noopener";a.textContent="Ver código en GitHub";ac.appendChild(a)}el.querySelector(".pbody").appendChild(ac)}
+el.querySelector("h3").textContent=tl(p.t);el.querySelector(".meta").textContent=tl(p.m);el.querySelector("p").textContent=tl(p.d);
+p.tags.forEach(function(x){var s=document.createElement("span");s.className="tag";s.textContent=tl(x);el.querySelector(".tags").appendChild(s)});
+if(p.l||p.doc){var ac=document.createElement("div");ac.className="acts";if(p.doc){var dc=document.createElement("a");dc.className="btn p";dc.href=p.doc;dc.target="_blank";dc.rel="noopener";dc.textContent=tl("Ver documentación");ac.appendChild(dc)}if(p.l){var a=document.createElement("a");a.className="btn s";a.href=p.l;a.target="_blank";a.rel="noopener";a.textContent=tl("Ver código en GitHub");ac.appendChild(a)}el.querySelector(".pbody").appendChild(ac)}
 list.appendChild(el)});
-if(!n)list.innerHTML='<p class="empty">No hay proyectos con esa etiqueta.</p>'}
+if(!n)list.innerHTML='<p class="empty">'+tl("No hay proyectos con esa etiqueta.")+'</p>'}
 render();
 document.querySelectorAll("[data-spec]").forEach(function(d){d.innerHTML=spec(+d.dataset.spec,+d.dataset.spec>10)});
 var CLOUD="cvykcvzy",TAG="portafolio-aves";
@@ -443,7 +542,7 @@ function tabs(){
 var ks=["all"];["foto","video","sono"].forEach(function(k){if(gal.querySelector('figure[data-k="'+k+'"]'))ks.push(k)});
 if(ks.indexOf(kind)<0)kind="all";
 tabsEl.innerHTML="";
-ks.forEach(function(k){var b=document.createElement("button");b.className="chip";b.textContent=names[k];b.setAttribute("aria-pressed",String(k===kind));b.onclick=function(){kind=k;apply();tabs()};tabsEl.appendChild(b)});
+ks.forEach(function(k){var b=document.createElement("button");b.className="chip";b.textContent=tl(names[k]);b.setAttribute("aria-pressed",String(k===kind));b.onclick=function(){kind=k;apply();tabs()};tabsEl.appendChild(b)});
 tabsEl.hidden=ks.length<3}
 function title(id){return id.split("/").pop().replace(/[-_]+/g," ").replace(/^\w/,function(c){return c.toUpperCase()})}
 function cldList(type){
@@ -453,17 +552,17 @@ var u="https://res.cloudinary.com/"+encodeURIComponent(CLOUD)+"/"+x.rt+"/upload/
 var c=(x.context&&x.context.custom&&x.context.custom.caption)||title(x.public_id),f=document.createElement("figure"),b=document.createElement("button"),k=document.createElement("figcaption");
 f.dataset.k=v?"video":"foto";if(i===0)f.className="big";
 f.dataset.src=v?u+"q_auto,c_limit,w_1280"+p+".mp4":u+"f_auto,q_auto,c_limit,w_1600"+p;f.dataset.t=x.rt;f.dataset.alt=c;
-b.setAttribute("aria-label",(v?"Reproducir: ":"Ampliar: ")+c);
+b.dataset.p=v?"Reproducir: ":"Ampliar: ";b.setAttribute("aria-label",tl(b.dataset.p)+c);
 var m=document.createElement("img");m.loading="lazy";m.decoding="async";m.alt=c;
 m.src=v?u+"so_0,c_fill,w_700,h_700,q_auto"+p+".jpg":u+"f_auto,q_auto,c_fill,w_700,h_700"+p;
 b.appendChild(m);
 if(v){var s=document.createElement("span");s.className="play";s.setAttribute("aria-hidden","true");s.textContent="▶";b.appendChild(s)}
 k.textContent=c;f.appendChild(b);f.appendChild(k);return f}
 var msg=document.getElementById("galmsg");
-function empty(){msg.textContent="Pronto añadiré aquí mis fotos y vídeos de campo."}
+function empty(){msg.dataset.k="Pronto añadiré aquí mis fotos y vídeos de campo.";msg.textContent=tl(msg.dataset.k)}
 function load(){
 if(!CLOUD){empty();return}
-msg.textContent="Cargando galería…";
+msg.dataset.k="Cargando galería…";msg.textContent=tl(msg.dataset.k);
 Promise.all([cldList("image"),cldList("video")]).then(function(r){
 var all=r[0].concat(r[1]).sort(function(a,b){return(a.created_at||"")<(b.created_at||"")?1:-1}).slice(0,60);
 console.info("Cloudinary: "+all.length+" archivos");if(!all.length){empty();return}
@@ -498,7 +597,7 @@ if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeT
 return new Promise(function(ok,no){var a=document.createElement("textarea");a.value=s;a.style.position="fixed";a.style.opacity="0";document.body.appendChild(a);a.select();var r=false;try{r=document.execCommand("copy")}catch(x){}document.body.removeChild(a);r?ok():no()})}
 var toast=document.getElementById("toast"),tt;
 function note(m){toast.textContent=m;toast.classList.add("on");clearTimeout(tt);tt=setTimeout(function(){toast.classList.remove("on")},2200)}
-document.querySelectorAll(".cp").forEach(function(b){var o=b.textContent;b.addEventListener("click",function(){copyTxt(b.dataset.c).then(function(){b.textContent="Copiado";note(b.dataset.m)},function(){note("No se pudo copiar, selecciona el texto manualmente")});setTimeout(function(){b.textContent=o},1600)})});
+document.querySelectorAll(".cp").forEach(function(b){var o=b.textContent;b.addEventListener("click",function(){copyTxt(b.dataset.c).then(function(){b.textContent=tl("Copiado");note(b.dataset.m)},function(){note(tl("No se pudo copiar, selecciona el texto manualmente"))});setTimeout(function(){b.textContent=tl("Copiar")},1600)})});
 function hideAll(){closeDk();var a=document.activeElement;if(a&&a.closest&&a.closest(".dk"))a.blur()}
 var down=false;
 document.addEventListener("pointerdown",function(e){down=!!e.target.closest(".dk")});
@@ -513,7 +612,7 @@ var root=document.documentElement,bgEl=document.getElementById("bg"),cv=document
 var rm=matchMedia("(prefers-reduced-motion:reduce)").matches;
 function rnd(s){return function(){s=(s*16807)%2147483647;return s/2147483647}}
 function f(x){return x.toFixed(1)}
-var R=rnd(97),W=0,H=0,dpr=1,t=0,dtF=1,col="#2f6b4f",dark=false,px=-1e4,py=-1e4,call={x:0,y:0,u:0},A,B,leaves=[],fl=[],an=[],nf=0,na=0,bw=0;
+var R=rnd(97),W=0,H=0,dpr=1,t=0,dtF=1,col="#2f6b4f",dark=false,px=-1e4,py=-1e4,call={x:0,y:0,u:0},A,B,leaves=[],fl=[],an=[],rip=[],nf=0,na=0,bw=0,cur="",scenesEl=document.getElementById("scenes"),fgEl=document.getElementById("fgs"),purge=0,lp=-1,msc=0,ema=1,lowq=0;
 function pine(r,cx,b,h){
 var n=4+Math.floor(r()*3),w=h*(.26+r()*.1),st=h*.8/n,o='<rect x="'+f(cx-w*.035)+'" y="'+f(b-h*.14)+'" width="'+f(w*.07)+'" height="'+f(h*.14)+'"/>',i,yb,tw,th;
 for(i=0;i<n;i++){yb=b-h*.1-i*st;tw=w*(1-i/n*.72);th=st*1.9;
@@ -526,37 +625,108 @@ return o}
 function hills(r,Hh,a){var o='M-40 '+f(Hh)+'L-40 '+f(Hh-a),x=-40,w;
 while(x<1700){w=160+r()*200;o+='Q'+f(x+w/2)+' '+f(Hh-a*(.6+r()*1.1))+' '+f(x+w)+' '+f(Hh-a*(.4+r()*.9));x+=w}
 return'<path d="'+o+'L'+f(x)+' '+f(Hh)+'Z"/>'}
-function layer(seed,sp,hmin,hmax,ps,sw,vw,Hh,hl){
-var r=rnd(seed),cnt=Math.max(3,Math.round(vw/sp)),o=hl?hills(r,Hh,hl):'',i,cx,h,t2;
+
+var PAR={l1:[-18,14],l2:[-36,26],l3:[-64,44],l4:[-96,60]};
+function nbk(){return innerWidth<700?2:3}
+function svgw(vw,Hh,o){return'<svg viewBox="0 0 '+vw+' '+Hh+'" preserveAspectRatio="xMidYMax slice" aria-hidden="true">'+o+'</svg>'}
+function sgw(svg,i,cls){return'<div class="sgw'+(cls||'')+'" style="--d:'+(4+i*1.7).toFixed(1)+'s;animation-delay:-'+(i*2.3).toFixed(1)+'s">'+svg+'</div>'}
+function layer(seed,sp,hmin,hmax,ps,sw,vw,Hh,hl,skip,pre){
+var r=rnd(seed),cnt=Math.max(3,Math.round(vw/sp)),nb=nbk(),st=(pre||'')+(hl?hills(r,Hh,hl):''),bk=[],i,cx,h,t2,o;
+for(i=0;i<nb;i++)bk.push('');
 for(i=0;i<cnt;i++){cx=-30+(vw+60)*(i+r()*.9)/cnt;h=Hh*(hmin+r()*(hmax-hmin));t2=r()<ps?pine(r,cx,Hh,h):oak(r,cx,Hh,h);
-o+=sw?'<g class="sw" style="--d:'+(4+r()*5).toFixed(1)+'s;animation-delay:-'+(r()*8).toFixed(1)+'s">'+t2+'</g>':'<g>'+t2+'</g>'}
-return'<svg viewBox="0 0 '+vw+' '+Hh+'" preserveAspectRatio="xMidYMax slice" aria-hidden="true">'+o+'<rect x="-40" y="'+(Hh-3)+'" width="'+(vw+80)+'" height="6"/></svg>'}
-function grass(seed,vw,Hh){
-var r=rnd(seed),o='',g,i,x,h,d,n=Math.round(vw/26);
-for(g=0;g<3;g++){o+='<g class="sw" style="--d:'+(3+g*1.3).toFixed(1)+'s;animation-delay:-'+(g*1.7).toFixed(1)+'s">';
-for(i=0;i<n;i++){x=r()*vw;h=Hh*(.35+r()*.65);d=(r()-.5)*46;
-o+='<path d="M'+f(x-3)+' '+Hh+'Q'+f(x+d*.3)+' '+f(Hh-h*.55)+' '+f(x+d)+' '+f(Hh-h)+'Q'+f(x+d*.3+5)+' '+f(Hh-h*.5)+' '+f(x+3)+' '+Hh+'Z"/>'}
-o+='</g>'}
-return'<svg viewBox="0 0 '+vw+' '+Hh+'" preserveAspectRatio="xMidYMax slice" aria-hidden="true">'+o+'</svg>'}
-function build(){
-var w=innerWidth,h=innerHeight,vw=Math.round(w*1.12),q=function(c){return bgEl.querySelector(c)};
-bw=w;
-q(".l1").innerHTML=layer(7,34,.18,.5,.85,false,vw,Math.round(h*.5),Math.round(h*.07));
-q(".l2").innerHTML=layer(19,52,.3,.85,.7,true,vw,Math.round(h*.42),0);
-q(".l3").innerHTML=layer(43,150,.6,1.5,.6,true,vw,Math.round(h*.34),0);
-q(".l4").innerHTML=grass(61,vw,Math.round(h*.15))}
+if(skip&&skip(cx))continue;
+if(sw)bk[i%nb]+=t2;else st+=t2}
+o=svgw(vw,Hh,st+'<rect x="-40" y="'+(Hh-3)+'" width="'+(vw+80)+'" height="6"/>');
+if(sw)for(i=0;i<nb;i++)o+=sgw(svgw(vw,Hh,bk[i]),i);
+return o}
+function grass(seed,vw,Hh,hs){
+var r=rnd(seed),nb=nbk(),n=Math.round(vw/26)*3/nb,o='',g,i,x,h,d,b;hs=hs||1;
+for(g=0;g<nb;g++){b='';
+for(i=0;i<n;i++){x=r()*vw;h=Hh*(.35+r()*.65)*hs;d=(r()-.5)*46;
+b+='<path d="M'+f(x-3)+' '+Hh+'Q'+f(x+d*.3)+' '+f(Hh-h*.55)+' '+f(x+d)+' '+f(Hh-h)+'Q'+f(x+d*.3+5)+' '+f(Hh-h*.5)+' '+f(x+3)+' '+Hh+'Z"/>'}
+o+=sgw(svgw(vw,Hh,b),g,' g')}
+return o}
+function stems(seed,vw,Hh,div,tip,skip){
+var r=rnd(seed),nb=nbk(),n=Math.round(vw/div)*3/nb,o='',g,i,x,h,d,b,hw=1.6;
+for(g=0;g<nb;g++){b='';
+for(i=0;i<n;i++){x=r()*vw;h=Hh*(.45+r()*.55);d=(r()-.5)*20;if(skip&&skip(x))continue;
+b+='<path d="M'+f(x-hw)+' '+Hh+'Q'+f(x+d*.3)+' '+f(Hh-h*.5)+' '+f(x+d)+' '+f(Hh-h)+'L'+f(x+d+hw*2)+' '+f(Hh-h)+'Q'+f(x+d*.3+hw*2)+' '+f(Hh-h*.5)+' '+f(x+hw)+' '+Hh+'Z"/>';
+if(tip===1&&r()<.6)b+='<ellipse cx="'+f(x+d+hw)+'" cy="'+f(Hh-h-7)+'" rx="2.8" ry="8"/>'}
+o+=sgw(svgw(vw,Hh,b),g,' g')}
+return o}
+function lake(r,vw,Hh){
+var cx=vw/2,cy=Hh*.4,rx=vw*.43,ry=Hh*.23,a='',b='',i,k=0,x,y,e;
+for(i=0;i<260&&k<Math.round(vw/45);i++){x=cx+(r()*2-1)*rx*.92;y=cy+(r()*2-1)*ry*.86;
+if(Math.pow((x-cx)/rx,2)+Math.pow((y-cy)/ry,2)<.78){e='<ellipse cx="'+f(x)+'" cy="'+f(y)+'" rx="'+f(12+r()*34)+'" ry="1.5"/>';if(k++%2)a+=e;else b+=e}}
+return svgw(vw,Hh,'<ellipse cx="'+f(cx)+'" cy="'+f(cy)+'" rx="'+f(rx)+'" ry="'+f(ry)+'"/>')
++'<div class="rip" style="--d:9s">'+svgw(vw,Hh,'<g style="fill:var(--ripple)">'+a+'</g>')+'</div><div class="rip" style="--d:13s;animation-delay:-5s">'+svgw(vw,Hh,'<g style="fill:var(--ripple)">'+b+'</g>')+'</div>'}
+function rows(vw,Hh){
+var vx=vw/2,vy=Hh*.3,n=24,d='',i,x;
+for(i=0;i<=n;i++){x=-40+(vw+80)*i/n;d+='M'+f(vx+(x-vx)*.18)+' '+f(vy)+'L'+f(x)+' '+f(Hh)}
+return'<path fill-opacity=".5" d="M'+f(vw*.16)+' '+f(vy)+'L'+f(vw*.84)+' '+f(vy)+'L'+f(vw+40)+' '+f(Hh)+'L-40 '+f(Hh)+'Z"/><path style="stroke:var(--bg);fill:none" stroke-opacity=".6" stroke-width="2.2" d="'+d+'"/>'}
+function fields(seed,vw,Hh,n,tilt){
+var r=rnd(seed),o='',i,y,d,p;
+for(i=0;i<n;i++){y=Hh*(.1+.7*i/n);d=(r()-.5)*tilt;p='M-40 '+f(y-d)+'L'+(vw+40)+' '+f(y+d)+'L'+(vw+40)+' '+Hh+'L-40 '+Hh+'Z';
+o+='<path fill-opacity=".45" d="'+p+'"/>'}
+return o}
+function poplars(r,vw,Hh,a){
+var o='',x=vw*(.1+r()*.5),i,h,b=Hh-a*.3;
+for(i=0;i<7;i++){h=Hh*(.12+r()*.07);o+='<rect x="'+f(x-1)+'" y="'+f(b-h*.3)+'" width="2" height="'+f(h*.3)+'"/><ellipse cx="'+f(x)+'" cy="'+f(b-h*.6)+'" rx="'+f(h*.12)+'" ry="'+f(h*.42)+'"/>';x+=26+r()*14}
+return o}
+function barn(r,vw,Hh,a){
+var x=vw*(.55+r()*.35),b=Hh-a*.35,s=Hh*.07+14;
+return'<rect x="'+f(x)+'" y="'+f(b-s)+'" width="'+f(s*1.8)+'" height="'+f(s+8)+'"/><path d="M'+f(x-s*.15)+' '+f(b-s)+'L'+f(x+s*.9)+' '+f(b-s*1.7)+'L'+f(x+s*1.95)+' '+f(b-s)+'Z"/><rect x="'+f(x+s*2)+'" y="'+f(b-s*1.5)+'" width="'+f(s*.6)+'" height="'+f(s*1.6)+'"/><ellipse cx="'+f(x+s*2.3)+'" cy="'+f(b-s*1.5)+'" rx="'+f(s*.3)+'" ry="'+f(s*.2)+'"/>'}
+function scarecrow(x,y,s){
+return'<rect x="'+f(x-1.5*s)+'" y="'+f(y-70*s)+'" width="'+f(3*s)+'" height="'+f(70*s)+'"/><rect x="'+f(x-24*s)+'" y="'+f(y-56*s)+'" width="'+f(48*s)+'" height="'+f(3*s)+'"/><circle cx="'+f(x)+'" cy="'+f(y-76*s)+'" r="'+f(7*s)+'"/><path d="M'+f(x-12*s)+' '+f(y-81*s)+'L'+f(x+12*s)+' '+f(y-81*s)+'L'+f(x+5*s)+' '+f(y-96*s)+'L'+f(x-5*s)+' '+f(y-96*s)+'Z"/><path d="M'+f(x-9*s)+' '+f(y-54*s)+'L'+f(x+9*s)+' '+f(y-54*s)+'L'+f(x+12*s)+' '+f(y-30*s)+'L'+f(x-12*s)+' '+f(y-30*s)+'Z"/>'}
+function peaks(r,vw,Hh,hmin,hmax,snow){
+var o='',x=-60,w,h,px,lx,rx,yy;
+while(x<vw+60){w=180+r()*220;h=Hh*(hmin+r()*(hmax-hmin));px=x+w*(.35+r()*.3);
+o+='<path d="M'+f(x)+' '+Hh+'L'+f(px)+' '+f(Hh-h)+'L'+f(x+w)+' '+Hh+'Z"/>';
+if(snow){lx=px-(px-x)*.22;rx=px+(x+w-px)*.22;yy=Hh-h*.78;
+o+='<path style="fill:var(--ripple)" d="M'+f(px)+' '+f(Hh-h)+'L'+f(rx)+' '+f(yy)+'L'+f(px+(rx-px)*.45)+' '+f(yy+h*.06)+'L'+f(px)+' '+f(yy-h*.01)+'L'+f(px-(px-lx)*.45)+' '+f(yy+h*.07)+'L'+f(lx)+' '+f(yy)+'Z"/>'}
+x+=w*.6}
+return o}
+function rocks(seed,vw,Hh){var r=rnd(seed),o='',i,n=Math.round(vw/180);
+for(i=0;i<n;i++)o+='<ellipse cx="'+f(r()*vw)+'" cy="'+f(Hh-4)+'" rx="'+f(14+r()*26)+'" ry="'+f(8+r()*10)+'"/>';
+return o}
+function wall(seed,vw,Hh){var r=rnd(seed),o='',x,w,h,row;
+for(row=0;row<2;row++){x=-10+row*14;while(x<vw*.5+row*20){w=20+r()*26;h=9+r()*6;o+='<rect x="'+f(x)+'" y="'+f(Hh-h*(row+1)-row*2)+'" width="'+f(w-2)+'" height="'+f(h)+'" rx="3"/>';x+=w}}
+return o}
+var SC={
+bosque:function(vw,h){var q=function(k){return Math.round(h*k)};
+return[[layer(7,34,.18,.5,.85,false,vw,q(.5),q(.07)),''],[layer(19,52,.3,.85,.7,true,vw,q(.42),0),''],[layer(43,150,.6,1.5,.6,true,vw,q(.34),0),''],[grass(61,vw,q(.15)),'']]},
+lago:function(vw,h){var q=function(k){return Math.round(h*k)},side=function(x){return x>vw*.14&&x<vw*.86},reed=function(x){return x>vw*.22&&x<vw*.78};
+return[[layer(11,70,.1,.28,.9,false,vw,q(.5),q(.1)),'color:var(--rock)'],[layer(23,48,.35,.9,.7,true,vw,q(.42),0,side),''],[lake(rnd(71),vw,q(.34)),'color:var(--water)'],[grass(127,vw,q(.15),.7)+stems(79,vw,q(.15),30,1,reed),'']]},
+cultivos:function(vw,h){var q=function(k){return Math.round(h*k)},r=rnd(83),a=q(.09),H3=q(.34);
+return[[layer(31,90,.08,.22,.5,false,vw,q(.5),a,0,barn(r,vw,q(.5),a)+poplars(r,vw,q(.5),a)),''],[svgw(vw,q(.42),fields(5,vw,q(.42),5,26)),'color:var(--crop)'],[svgw(vw,H3,rows(vw,H3)+scarecrow(vw*(.28+r()*.44),H3*.7,H3/330)),'color:var(--crop)'],[grass(91,vw,q(.15),.45),'']]},
+montana:function(vw,h){var q=function(k){return Math.round(h*k)};
+return[[svgw(vw,q(.5),peaks(rnd(97),vw,q(.5),.45,.95,true)),'color:var(--rock)'],[layer(37,60,.1,.3,1,false,vw,q(.42),0,0,peaks(rnd(101),vw,q(.42),.25,.6,false)),'color:var(--rock)'],[layer(47,70,.5,1.3,1,true,vw,q(.34),0,0,rocks(103,vw,q(.34))),''],[grass(107,vw,q(.15),.6),'']]},
+dehesa:function(vw,h){var q=function(k){return Math.round(h*k)};
+return[[layer(53,120,.08,.2,0,false,vw,q(.5),q(.09)),'color:var(--dry)'],[layer(59,170,.25,.5,0,true,vw,q(.42),q(.04)),''],[layer(67,420,.9,1.3,0,true,vw,q(.34),0,0,wall(113,vw,q(.34))),''],[grass(127,vw,q(.15),.7),'color:var(--dry)']]}};
+function applyPar(p){[].forEach.call(bgEl.querySelectorAll(".ly"),function(e){var k=PAR[e.classList[1]];if(k)e.style.transform="translate3d("+(p*k[0]).toFixed(1)+"px,"+(p*k[1]).toFixed(1)+"px,0)"})}
+function mkBack(L){return'<div class="ly l1" style="'+L[0][1]+'">'+L[0][0]+'</div><div class="mist m1"></div><div class="ly l2" style="'+L[1][1]+'">'+L[1][0]+'</div><div class="ly l3" style="'+L[2][1]+'">'+L[2][0]+'</div><div class="mist m2"></div>'}
+function mkFg(L){return'<div class="ly l4" style="'+L[3][1]+'">'+L[3][0]+'</div>'}
+function showScene(id){
+var back=scenesEl.querySelector('[data-id="'+id+'"]'),fg,L,vw;cur=id;
+if(!back){vw=Math.round(innerWidth*1.12);L=SC[id](vw,innerHeight);
+back=document.createElement("div");back.className="scene sc-"+id;back.dataset.id=id;back.innerHTML=mkBack(L);scenesEl.appendChild(back);
+fg=document.createElement("div");fg.className="scene sc-"+id;fg.dataset.id=id;fg.innerHTML=mkFg(L);fgEl.appendChild(fg);
+applyPar(lp<0?0:lp);void back.offsetWidth}
+[scenesEl,fgEl].forEach(function(c){[].forEach.call(c.children,function(e){e.classList.toggle("on",e.dataset.id===id)})});
+clearTimeout(purge);purge=setTimeout(function(){[scenesEl,fgEl].forEach(function(c){[].slice.call(c.children).forEach(function(e){if(e.dataset.id!==cur)c.removeChild(e)})})},1700)}
+function build(){bw=innerWidth;scenesEl.innerHTML="";fgEl.innerHTML="";showScene(cur||"bosque")}
 function theme(){var cs=getComputedStyle(root);col=cs.getPropertyValue("--brand").trim()||col;dark=root.dataset.theme?root.dataset.theme==="dark":matchMedia("(prefers-color-scheme:dark)").matches}
-function size(){var w=innerWidth,h=innerHeight;if(w===W&&h===H)return;W=w;H=h;dpr=Math.min(2,window.devicePixelRatio||1);cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr)}
+function size(){var w=innerWidth,h=innerHeight;if(w===W&&h===H)return;W=w;H=h;dpr=Math.min(lowq?1:w<700?1.5:2,window.devicePixelRatio||1);cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr)}
 function flock(n,o){var b=[],i,a;
 for(i=0;i<n;i++){a=R()*6.283;b.push({x:o.x+(R()-.5)*180,y:o.y+(R()-.5)*120,vx:Math.cos(a)*o.mn,vy:Math.sin(a)*o.mn,fx:0,fy:0,ph:R()*6.283,z:R(),id:R()*60})}
-o.b=b;o.r2=o.pr*o.pr;o.s2=o.sr*o.sr;o.w0=o.wt;return o}
+o.hot=0;o.b=b;o.r2=o.pr*o.pr;o.s2=o.sr*o.sr;o.w0=o.wt;return o}
 function init(){var n=W<700?44:W<1100?66:92,i;
 A=flock(n,{x:W*.5,y:H*.4,mn:1.5,mx:3.1,mf:.075,pr:70,sr:20,wa:1,wc:.85,ws:1.7,wt:.55,smin:.5,smax:.95,al:.34,fa:.11,fb:.083,o1:0,o2:1.7});
 B=flock(4,{x:W*.3,y:H*.6,mn:.9,mx:1.8,mf:.03,pr:260,sr:90,wa:.5,wc:.25,ws:1.4,wt:.4,smin:1.25,smax:1.7,al:.22,fa:.05,fb:.037,o1:2.6,o2:.4});
 for(i=0;i<(W<700?14:26);i++)leaves.push({x:R()*W,y:R()*H,s:5+R()*7,r:R()*6.283,vr:(R()-.5)*.03,vy:.25+R()*.45,ph:R()*6.283,z:R(),c:R()<.22?1:0});
 }
 function step(F,dt,tt,tx,ty){
-var a=F.b,n=a.length,i,j,b,o,dx,dy,d2,ax,ay,cx,cy,sx,sy,cn,fx,fy,m,d,k;
+var a=F.b,n=a.length,i,j,b,o,dx,dy,d2,ax,ay,cx,cy,sx,sy,cn,fx,fy,m,d,k,mxe=F.mx*(F.hot>tt?1.8:1);
 for(i=0;i<n;i++){b=a[i];ax=ay=cx=cy=sx=sy=cn=0;
 for(j=0;j<n;j++){if(j===i)continue;o=a[j];dx=o.x-b.x;dy=o.y-b.y;d2=dx*dx+dy*dy;
 if(d2<F.r2){cn++;ax+=o.vx;ay+=o.vy;cx+=dx;cy+=dy;if(d2<F.s2&&d2>.01){sx-=dx/d2*F.sr;sy-=dy/d2*F.sr}}}
@@ -569,10 +739,10 @@ if(d<150){k=1-d/150;fx+=(b.x-px)/(d||1)*F.mx*3*k;fy+=(b.y-py)/(d||1)*F.mx*3*k}
 if(b.x<-70)fx+=F.mx*1.5;else if(b.x>W+70)fx-=F.mx*1.5;
 if(b.y<-70)fy+=F.mx*1.5;else if(b.y>H+70)fy-=F.mx*1.5;
 m=Math.sin(tt*.7+b.id)*.25;fx-=b.vy*m;fy+=b.vx*m;
-m=Math.hypot(fx,fy);k=F.mf*(1+k*1.5);if(m>k){fx*=k/m;fy*=k/m}
+m=Math.hypot(fx,fy);k=F.mf*(1+k*1.5)*(mxe>F.mx?1.6:1);if(m>k){fx*=k/m;fy*=k/m}
 b.fx=fx;b.fy=fy}
 for(i=0;i<n;i++){b=a[i];b.vx+=b.fx*dt;b.vy+=b.fy*dt;m=Math.hypot(b.vx,b.vy)||.001;
-k=m>F.mx?F.mx:m<F.mn?F.mn:m;b.vx*=k/m;b.vy*=k/m;b.x+=b.vx*dt;b.y+=b.vy*dt}}
+k=m>mxe?mxe:m<F.mn?F.mn:m;b.vx*=k/m;b.vy*=k/m;b.x+=b.vx*dt;b.y+=b.vy*dt}}
 function flocks(dt,tt){
 var calling=call.u>tt,tx,ty;
 A.wt=A.w0*(calling?3:1);
@@ -593,7 +763,8 @@ ctx.restore()}
 function update(dt,tt){
 var i,l,m,wind=Math.sin(tt*.2)*.35+.15;
 for(i=0;i<leaves.length;i++){l=leaves[i];l.y+=l.vy*dt*(.6+l.z*.8);l.x+=(Math.sin(tt*.8+l.ph)*.4+wind)*dt;l.r+=l.vr*dt;
-if(l.y>H+20||l.x>W+30){l.y=-20;l.x=R()*W}}}
+if(l.y>H+20||l.x>W+30){l.y=-20;l.x=R()*W}}
+for(i=rip.length-1;i>=0;i--){rip[i].a+=dt/38;if(rip[i].a>=1)rip.splice(i,1)}}
 function paint(tt){
 var i,b,F,q,l,m,pu,boost=dark?1.25:1;
 ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,H);
@@ -606,15 +777,21 @@ ctx.fillStyle=col;
 for(q=0;q<2;q++){F=q?A:B;
 for(i=0;i<F.b.length;i++){b=F.b[i];ctx.globalAlpha=F.al*boost*(.55+.45*b.z);bird(b,F.smin+(F.smax-F.smin)*b.z)}}
 for(i=0;i<an.length;i++)drawAn(an[i],dark?.5:.38);
+ctx.strokeStyle=col;ctx.lineWidth=2;
+for(i=0;i<rip.length;i++){l=rip[i];ctx.globalAlpha=(1-l.a)*.35;ctx.beginPath();ctx.arc(l.x,l.y,8+l.a*110,0,6.283);ctx.stroke()}
 ctx.globalAlpha=1}
 var FT=[{v:2.8,sc:[1,1.3],fr:.42,amp:[35,80],fq:[1.1,1.9]},{v:1.1,sc:[1.5,1.9],fr:.12,amp:[10,25],fq:[.4,.7]},{v:1,sc:[1.3,1.7],fr:.08,amp:[30,60],fq:[.35,.6]},{v:2,sc:[1.1,1.4],fr:.26,amp:[15,35],fq:[.8,1.1]}];
 function spawnFly(){var k=Math.floor(R()*4),T=FT[k],d=R()<.5?1:-1,y=H*(.12+R()*.4);
-fl.push({k:k,x:d>0?-90:W+90,y:y,y0:y,d:d,v:T.v*(.85+R()*.3),sc:T.sc[0]+R()*(T.sc[1]-T.sc[0]),ph:R()*6.283,age:0,ang:0,amp:T.amp[0]+R()*(T.amp[1]-T.amp[0]),fq:T.fq[0]+R()*(T.fq[1]-T.fq[0])})}
-function updFly(dt,tt){var i,a,ny;
+fl.push({k:k,x:d>0?-90:W+90,y:y,y0:y,d:d,v:T.v*(.85+R()*.3),sc:T.sc[0]+R()*(T.sc[1]-T.sc[0]),ph:R()*6.283,age:0,ang:0,t0:y,boost:1,amp:T.amp[0]+R()*(T.amp[1]-T.amp[0]),fq:T.fq[0]+R()*(T.fq[1]-T.fq[0])})}
+function updFly(dt,tt){var i,a,ny,dd,v;
 if(!nf)nf=tt+2;
 if(tt>nf&&fl.length<3){spawnFly();nf=tt+5+R()*10}
-for(i=fl.length-1;i>=0;i--){a=fl[i];a.age+=dt/60;a.x+=a.d*a.v*dt;ny=a.y0+Math.sin(a.age*a.fq)*a.amp;
-a.ang=Math.max(-.6,Math.min(.6,Math.atan2(ny-a.y,a.v*dt)));a.y=ny;a.ph+=dt*FT[a.k].fr;
+for(i=fl.length-1;i>=0;i--){a=fl[i];dd=Math.hypot(a.x-px,a.y-py);
+if(dd<130){a.t0=Math.max(30,Math.min(H*.75,a.t0+(a.y>=py?1:-1)*2.2*dt));a.boost=Math.max(a.boost,1.5)}
+a.boost=1+(a.boost-1)*Math.pow(.985,dt);v=a.v*a.boost;
+a.y0+=(a.t0-a.y0)*Math.min(1,.05*dt);
+a.age+=dt/60*a.boost;a.x+=a.d*v*dt;ny=a.y0+Math.sin(a.age*a.fq)*a.amp;
+a.ang=Math.max(-.6,Math.min(.6,Math.atan2(ny-a.y,v*dt)));a.y=ny;a.ph+=dt*FT[a.k].fr*a.boost;
 if(a.x<-120||a.x>W+120)fl.splice(i,1)}}
 function wingP(k){ctx.beginPath();
 if(k===0){ctx.moveTo(2,0);ctx.quadraticCurveTo(-2,-7,-14,-12);ctx.quadraticCurveTo(-7,-3,-5,0)}
@@ -645,22 +822,40 @@ ctx.beginPath();ctx.moveTo(10.5,-2.6);ctx.lineTo(13,-2);ctx.lineTo(10.5,-1.4);ct
 ctx.beginPath();ctx.moveTo(-7,-1);ctx.lineTo(-16,-1.5);ctx.lineTo(-16,2);ctx.lineTo(-7,1.5);ctx.closePath();ctx.fill()}
 ctx.save();ctx.scale(1,sy);wingP(k);ctx.restore();
 ctx.restore()}
-function spawnAn(){var rb=R()<.7;an.push({k:rb?0:1,x:0,gy:H-6-R()*20,d:R()<.5?1:-1,sc:.9+R()*.45,ph:0,hc:0,st:0,tm:0,age:0,v:rb?2.2:1.7});
-var a=an[an.length-1];a.x=a.d>0?-60:W+60}
-function updAn(dt,tt){var i,a,c;
+var FA={bosque:[0,1,2],lago:[3,3,3,0],cultivos:[0,1,0],montana:[5,5,1],dehesa:[4,4,0,2]},AV=[2.2,1.7,1.5,.55,.55,1],AR=[0,.16,.12,.08,.09,.12];
+function spawnAn(){
+var al=FA[cur]||FA.bosque,k=al[Math.floor(R()*al.length)],d=R()<.5?1:-1,n=k===3?2+Math.floor(R()*2):1,i,gy=k===3?H*(.74+R()*.09):H-10-R()*26;
+for(i=0;i<n;i++)an.push({k:k,x:(d>0?-60:W+60)-d*i*46,gy:gy+(k===3?(R()-.5)*14:0),d:d,sc:k===3?.85+R()*.3:.9+R()*.4,ph:k===0?0:R()*6,hc:0,st:0,tm:0,age:0,boost:1,fade:1,m:R()<.5,v:AV[k]*(.92+R()*.16)})}
+function updAn(dt,tt){var i,a,c,bo,dx,dy,k,al=FA[cur]||FA.bosque;
 if(!na)na=tt+6;
-if(tt>na&&!an.length){spawnAn();na=tt+14+R()*18}
-for(i=an.length-1;i>=0;i--){a=an[i];a.age+=dt/60;
-if(a.k===0){
+if(tt>na&&!an.length){spawnAn();na=tt+12+R()*16}
+for(i=an.length-1;i>=0;i--){a=an[i];k=a.k;a.age+=dt/60;
+if(al.indexOf(k)<0){a.fade-=dt*.02;if(a.fade<=0){an.splice(i,1);continue}}
+dx=a.x-px;dy=a.gy-14*a.sc-py;
+if(Math.abs(dx)<130&&Math.abs(dy)<110){a.d=dx>=0?1:-1;a.st=0;a.boost=Math.max(a.boost,1.8)}
+a.boost=1+(a.boost-1)*Math.pow(.99,dt);bo=a.boost;
+if(k===0){
 if(a.st===1){if(a.age>a.tm)a.st=0}
-else{a.ph+=dt*.1;a.x+=a.d*a.v*dt*(.25+.9*Math.sin(a.ph%Math.PI));c=Math.floor(a.ph/Math.PI);
-if(c>a.hc){a.hc=c;if(R()<.22){a.st=1;a.tm=a.age+1+R()*2;a.ph=c*Math.PI}}}}
-else{a.ph+=dt*.16;a.x+=a.d*a.v*dt}
-if(a.x<-90||a.x>W+90)an.splice(i,1)}}
-function drawAn(a,al){var q,hp,tw,x,i,sw;
-ctx.save();ctx.translate(a.x,a.gy);ctx.scale(a.d*a.sc,a.sc);
-if(a.k===0){q=a.ph%Math.PI;hp=a.st?0:Math.sin(q);tw=a.st?Math.sin(a.age*9)*.12:0;
-ctx.globalAlpha=al;ctx.translate(0,-hp*13);ctx.rotate(a.st?0:-.28*Math.cos(q));
+else{a.ph+=dt*.1*bo;a.x+=a.d*a.v*dt*bo*(.25+.9*Math.sin(a.ph%Math.PI));c=Math.floor(a.ph/Math.PI);
+if(c>a.hc){a.hc=c;if(bo<1.2&&R()<.22){a.st=1;a.tm=a.age+1+R()*2;a.ph=c*Math.PI}}}}
+else if(a.st===1){if(a.age>a.tm)a.st=0}
+else{a.ph+=dt*AR[k]*bo;a.x+=a.d*a.v*dt*bo;
+if((k===2||k===4)&&bo<1.2&&R()<.004*dt){a.st=1;a.tm=a.age+1.5+R()*3}}
+if(a.x<-110||a.x>W+110)an.splice(i,1)}}
+function scare(x,y){var i,q,F,b,dx,dy,d,p,hit,a;
+rip.push({x:x,y:y,a:0});
+for(q=0;q<2;q++){F=q?A:B;hit=0;
+for(i=0;i<F.b.length;i++){b=F.b[i];dx=b.x-x;dy=b.y-y;d=Math.hypot(dx,dy)||1;
+if(d<260){p=1-d/260;b.vx+=dx/d*p*F.mx*3;b.vy+=dy/d*p*F.mx*3;hit=1}}
+if(hit)F.hot=t+1.8}
+for(i=0;i<fl.length;i++){a=fl[i];d=Math.hypot(a.x-x,a.y-y);if(d<220){a.boost=2.6;a.t0=Math.max(30,Math.min(H*.75,a.t0+(a.y>=y?1:-1)*(60+80*(1-d/220))))}}
+for(i=0;i<an.length;i++){a=an[i];d=Math.hypot(a.x-x,a.gy-14*a.sc-y);if(d<240){a.boost=2.8;a.d=a.x>=x?1:-1;a.st=0}}}
+function drawAn(a,al){
+var k=a.k,q,hp,tw,x,i,sw,c,hx=0,hy=0,g=a.st===1;
+c=k===1?(dark?"#d58a4a":"#b86a2f"):k===2?(dark?"#c08a5e":"#8a5a3c"):k===5?(dark?"#b8aa98":"#7a6f64"):col;
+ctx.save();ctx.translate(a.x,a.gy);ctx.scale(a.d*a.sc,a.sc);ctx.globalAlpha=al*a.fade;ctx.fillStyle=c;ctx.strokeStyle=c;ctx.lineCap="round";
+if(k===0){q=a.ph%Math.PI;hp=g?0:Math.sin(q);tw=g?Math.sin(a.age*9)*.12:0;
+ctx.translate(0,-hp*13);ctx.rotate(g?0:-.28*Math.cos(q));
 ctx.beginPath();ctx.ellipse(0,-8,9.5,6.5,0,0,6.283);ctx.fill();
 ctx.beginPath();ctx.arc(-4,-7.5,6,0,6.283);ctx.fill();
 ctx.beginPath();ctx.arc(9,-12.5,4.3,0,6.283);ctx.fill();
@@ -669,7 +864,7 @@ ctx.beginPath();ctx.ellipse(11.5,-20.5,1.6,4.8,.2+tw,0,6.283);ctx.fill();
 ctx.beginPath();ctx.arc(-12,-9.5,2.4,0,6.283);ctx.fill();
 ctx.beginPath();ctx.ellipse(-4,-1.2,5,1.7,0,0,6.283);ctx.fill();
 ctx.beginPath();ctx.ellipse(7,-1.5,3.5,1.4,0,0,6.283);ctx.fill()}
-else{ctx.globalAlpha=al;ctx.fillStyle=dark?"#d58a4a":"#b86a2f";ctx.strokeStyle=ctx.fillStyle;ctx.lineCap="round";ctx.lineWidth=2.4;
+else if(k===1){ctx.lineWidth=2.4;
 ctx.beginPath();ctx.ellipse(0,-14,14,5.5,0,0,6.283);ctx.fill();
 ctx.beginPath();ctx.arc(15,-19,4.5,0,6.283);ctx.fill();
 ctx.beginPath();ctx.moveTo(17,-22.5);ctx.lineTo(28,-18);ctx.lineTo(17,-15.5);ctx.fill();
@@ -678,22 +873,68 @@ ctx.beginPath();ctx.moveTo(17,-22.5);ctx.lineTo(20,-28.5);ctx.lineTo(21.5,-21.5)
 ctx.beginPath();ctx.moveTo(-13,-16);ctx.quadraticCurveTo(-27,-23,-34,-11);ctx.quadraticCurveTo(-25,-12,-13,-11);ctx.fill();
 x=[10,7,-8,-11];ctx.beginPath();
 for(i=0;i<4;i++){sw=Math.sin(a.ph+(i%2)*Math.PI+(i>1?.6:0))*6;ctx.moveTo(x[i],-10);ctx.lineTo(x[i]+sw,0)}
-ctx.stroke();ctx.fillStyle=col}
+ctx.stroke()}
+else if(k===2){ctx.lineWidth=2.2;if(g){hx=4;hy=22}
+ctx.beginPath();ctx.ellipse(0,-24,15,6.5,0,0,6.283);ctx.fill();
+ctx.beginPath();ctx.moveTo(9,-29);ctx.lineTo(15,-26);ctx.lineTo(22+hx,-39+hy);ctx.lineTo(17+hx,-41+hy);ctx.closePath();ctx.fill();
+ctx.beginPath();ctx.ellipse(23+hx,-42+hy,5,3,g?1.1:.3,0,6.283);ctx.fill();
+ctx.beginPath();ctx.ellipse(20+hx,-46+hy,1.6,3.2,-.4,0,6.283);ctx.fill();
+if(a.m&&!g){ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(21,-45);ctx.lineTo(19,-54);ctx.lineTo(15,-59);ctx.moveTo(19,-54);ctx.lineTo(23,-59);ctx.moveTo(24,-45);ctx.lineTo(27,-53);ctx.lineTo(25,-58);ctx.stroke();ctx.lineWidth=2.2}
+ctx.beginPath();ctx.arc(-15,-27,2.4,0,6.283);ctx.fill();
+x=[9,6,-9,-12];ctx.beginPath();
+for(i=0;i<4;i++){sw=g?0:Math.sin(a.ph+(i%2)*Math.PI+(i>1?.6:0))*5;ctx.moveTo(x[i],-19);ctx.lineTo(x[i]+sw,0)}
+ctx.stroke()}
+else if(k===3){hp=Math.sin(a.age*3+a.ph)*1.1;ctx.translate(0,hp);
+ctx.globalAlpha=al*a.fade*.5;ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(-8,-1);ctx.lineTo(-24,-5);ctx.moveTo(-8,-1);ctx.lineTo(-24,3);ctx.stroke();
+ctx.globalAlpha=al*a.fade;
+ctx.beginPath();ctx.ellipse(0,-4,9,4.5,0,0,6.283);ctx.fill();
+ctx.beginPath();ctx.moveTo(-8,-6);ctx.lineTo(-13,-10);ctx.lineTo(-6,-3);ctx.fill();
+ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(6,-6);ctx.lineTo(9,-11);ctx.stroke();
+ctx.beginPath();ctx.arc(9.5,-12,3,0,6.283);ctx.fill();
+ctx.beginPath();ctx.moveTo(12,-12.5);ctx.lineTo(17,-11);ctx.lineTo(12,-10);ctx.fill()}
+else if(k===4){ctx.lineWidth=1.8;if(g){hx=3;hy=9}
+x=[7,4,-5,-8];ctx.beginPath();
+for(i=0;i<4;i++){sw=g?0:Math.sin(a.ph+(i%2)*Math.PI)*3;ctx.moveTo(x[i],-10);ctx.lineTo(x[i]+sw,0)}
+ctx.stroke();
+ctx.beginPath();ctx.arc(0,-17,8.5,0,6.283);ctx.arc(-8,-18,6.5,0,6.283);ctx.arc(8,-18,6.5,0,6.283);ctx.arc(0,-22,6.5,0,6.283);ctx.arc(-4,-13,6,0,6.283);ctx.arc(5,-13,6,0,6.283);ctx.fill();
+ctx.beginPath();ctx.ellipse(15+hx,-17+hy,4.2,3.2,g?.8:.2,0,6.283);ctx.fill();
+ctx.beginPath();ctx.ellipse(12+hx,-21+hy,1.6,2.6,-.6,0,6.283);ctx.fill()}
+else{ctx.lineWidth=2;
+ctx.beginPath();ctx.ellipse(0,-18,12,5.5,0,0,6.283);ctx.fill();
+ctx.beginPath();ctx.ellipse(11,-23,3.5,5.5,.5,0,6.283);ctx.fill();
+ctx.beginPath();ctx.ellipse(15,-29,3.4,2.3,.3,0,6.283);ctx.fill();
+ctx.lineWidth=1.7;ctx.beginPath();ctx.moveTo(13,-31);ctx.quadraticCurveTo(7,-41,0,-36);ctx.stroke();
+ctx.beginPath();ctx.moveTo(17,-27);ctx.lineTo(16,-22);ctx.lineTo(19,-26);ctx.fill();
+ctx.lineWidth=2;x=[8,5,-8,-11];ctx.beginPath();
+for(i=0;i<4;i++){sw=Math.sin(a.ph+(i%2)*Math.PI+(i>1?.6:0))*4;ctx.moveTo(x[i],-14);ctx.lineTo(x[i]+sw,0)}
+ctx.stroke();
+ctx.beginPath();ctx.moveTo(-12,-20);ctx.lineTo(-16,-22);ctx.lineTo(-12,-17);ctx.fill()}
 ctx.restore()}
+function degrade(){lowq=1;A.b.length=Math.max(30,Math.floor(A.b.length*.6));leaves.length=Math.min(leaves.length,8);W=0;size()}
 function prewarm(){var k;for(k=0;k<160;k++)flocks(1,k/60)}
-var lastT=0,fc=0,lp=-1;
+var lastT=0,fc=0;
 function tick(now){
-var dt=Math.min(2.5,(now-lastT)/16.667)||1,sh=root.scrollHeight-innerHeight,p;
+var dt=Math.min(2.5,(now-lastT)/16.667)||1,sh=msc,p;
 lastT=now;dtF=dt;t=now/1000;
-if(++fc%45===0)theme();
+ema+=(dt-ema)*.05;if(!lowq&&fc>240&&ema>1.7)degrade();
+if(++fc%120===0)theme();if(fc%60===0)msc=root.scrollHeight-innerHeight;
 p=sh>0?Math.min(1,Math.max(0,scrollY/sh)):0;
-if(Math.abs(p-lp)>.001){bgEl.style.setProperty("--p",p.toFixed(3));lp=p}
+if(Math.abs(p-lp)>.0008){applyPar(p);lp=p}
 flocks(dt,t);update(dt,t);updFly(dt,t);updAn(dt,t);paint(t);requestAnimationFrame(tick)}
-theme();size();build();init();prewarm();
+theme();size();build();init();prewarm();msc=root.scrollHeight-innerHeight;
+var smap={inicio:"bosque",proyectos:"lago",trayectoria:"cultivos",skills:"montana",idiomas:"dehesa",aves:"bosque"};
+if("IntersectionObserver" in window){var so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&smap[e.target.id])showScene(smap[e.target.id])})},{rootMargin:"-50% 0px -50% 0px"});
+Object.keys(smap).forEach(function(k){var s=document.getElementById(k);if(s)so.observe(s)})}
 if(rm)paint(0);else requestAnimationFrame(tick);
 addEventListener("pointermove",function(e){px=e.clientX;py=e.clientY},{passive:true});
 document.addEventListener("pointerleave",function(){px=py=-1e4});
-var rt;addEventListener("resize",function(){clearTimeout(rt);rt=setTimeout(function(){size();if(Math.abs(innerWidth-bw)>60)build();if(rm)paint(0)},200)});
+var rt;addEventListener("resize",function(){clearTimeout(rt);rt=setTimeout(function(){size();msc=root.scrollHeight-innerHeight;if(Math.abs(innerWidth-bw)>60)build();if(rm)paint(0)},200)});
+var tp=null;
+function blocked(e){return e.target.closest&&e.target.closest("a,button,input,textarea,select,summary,dialog,.bubble,.cvpop")}
+if(!rm){
+document.addEventListener("pointerdown",function(e){if(blocked(e))return;if(e.pointerType==="touch"){tp={x:e.clientX,y:e.clientY,t:performance.now(),id:e.pointerId};return}scare(e.clientX,e.clientY)});
+document.addEventListener("pointerup",function(e){var dx,dy;if(e.pointerType==="touch"){setTimeout(function(){px=py=-1e4},700);if(tp&&e.pointerId===tp.id){dx=e.clientX-tp.x;dy=e.clientY-tp.y;if(dx*dx+dy*dy<100&&performance.now()-tp.t<350){scare(e.clientX,e.clientY);px=e.clientX;py=e.clientY}}tp=null}});
+document.addEventListener("pointercancel",function(){tp=null})}
 document.getElementById("theme").addEventListener("click",function(){setTimeout(function(){theme();if(rm)paint(0)},0)});
 matchMedia("(prefers-color-scheme:dark)").addEventListener("change",function(){theme();if(rm)paint(0)});
 
@@ -705,27 +946,38 @@ var acts=[
 {l:"Habilidades",go:"skills",s:"Machine learning, deep learning y audio, análisis de datos, cloud y desarrollo, agrupado por áreas."},
 {l:"Idiomas",go:"idiomas",s:"Español nativo, inglés B1 y algún dato más."},
 {l:"Aves",go:"aves",s:"La afición de Javier. ¡Y mi sección favorita, claro!"},
+{l:"Descargar CV",cv:1,s:"Descargando el CV. Puedes elegir el idioma con el botón «CV» de la cabecera."},
 {l:"Contacto",dock:1,s:"Correo, teléfono y GitHub están en los botones de abajo a la derecha. Pulsa uno para copiarlo."},
 {l:"Dato curioso",fact:1}];
-if(!rm)acts.push({l:"Llamar a la bandada",call:1,s:"¡Prrr-tiu, prrr-tiu! Mira cómo vienen."});
-acts.forEach(function(a,i){var b=document.createElement("button");b.type="button";b.textContent=a.l;b.dataset.i=i;qr.appendChild(b)});
+if(!rm){acts.push({l:"Jugar con ellos",s:"Acerca el puntero a las aves y a los animales para desviarlos, y haz clic o toca para asustarlos: huirán más rápido."});acts.push({l:"Llamar a la bandada",call:1,s:"¡Prrr-tiu, prrr-tiu! Mira cómo vienen."})}
+function chips(){qr.innerHTML="";acts.forEach(function(a,i){var b=document.createElement("button");b.type="button";b.textContent=tl(a.l);b.dataset.i=i;qr.appendChild(b)})}
+chips();
 function talk(){asEl.classList.add("sp");clearTimeout(tm3);tm3=setTimeout(function(){asEl.classList.remove("sp")},1400)}
 function tilt(){asEl.classList.add("t");clearTimeout(tm2);tm2=setTimeout(function(){asEl.classList.remove("t")},1300)}
 function close(){open=false;bt.setAttribute("aria-expanded","false");pan.classList.remove("on","full");clearTimeout(tm)}
-function show(m,full){txt.textContent=m;pan.classList.add("on");pan.classList.toggle("full",!!full);talk();clearTimeout(tm);tm=setTimeout(close,full?16000:6000)}
+function show(m,full){txt.textContent=tl(m);pan.classList.add("on");pan.classList.toggle("full",!!full);talk();clearTimeout(tm);tm=setTimeout(close,full?16000:6000)}
 bt.addEventListener("click",function(){tilt();if(pan.classList.contains("on")){close();return}open=true;bt.setAttribute("aria-expanded","true");show("¿Qué te enseño? Elige una opción o pide un dato curioso.",true)});
 qr.addEventListener("click",function(e){var b=e.target.closest("button"),a,s,r;if(!b)return;a=acts[+b.dataset.i];tilt();
 if(a.fact){show(facts[fi++%facts.length],true);return}
 show(a.s,true);
 if(a.go){s=document.getElementById(a.go);if(s)s.scrollIntoView({behavior:rm?"auto":"smooth",block:"start"})}
+if(a.cv){s=document.getElementById("cvlink");if(s)s.click()}
 if(a.dock&&dock){dock.classList.add("hl");setTimeout(function(){dock.classList.remove("hl")},2200)}
 if(a.call){r=bt.getBoundingClientRect();call.x=r.left+r.width/2;call.y=r.top;call.u=t+7}});
 document.addEventListener("click",function(e){if(open&&!asEl.contains(e.target))close()});
 document.addEventListener("keydown",function(e){if(e.key==="Escape"&&pan.classList.contains("on")){close();bt.focus()}});
 document.addEventListener("pointermove",function(e){var b=sv.getBoundingClientRect(),dx=e.clientX-(b.left+b.width*.5),dy=e.clientY-(b.top+b.height*.32),d=Math.hypot(dx,dy)||1,k=Math.min(1,d/240)*1.6;
 pp.forEach(function(p){p.style.transform="translate("+(dx/d*k).toFixed(1)+"px,"+(dy/d*k).toFixed(1)+"px)"})});
+window.onLang=function(){chips();close()};
 setTimeout(function(){if(!pan.classList.contains("on"))show("¡Prrr-tiu! Soy el estornino del bosque, el guía de este portafolio. Pulsa sobre mí.",false)},3500);
 })();
+(function(){var m=document.querySelector(".cvm"),b=document.getElementById("cvbtn");
+function shut(){m.classList.remove("open");b.setAttribute("aria-expanded","false")}
+b.addEventListener("click",function(e){e.stopPropagation();var o=!m.classList.contains("open");m.classList.toggle("open",o);b.setAttribute("aria-expanded",String(o))});
+document.addEventListener("click",function(e){if(!m.contains(e.target))shut()});
+document.addEventListener("keydown",function(e){if(e.key==="Escape")shut()});
+[].forEach.call(m.querySelectorAll("a"),function(a){a.addEventListener("click",shut)});
+[].forEach.call(document.querySelectorAll(".lng button"),function(x){x.addEventListener("click",function(){applyLang(x.dataset.lang)})})})();
 </script>
 </body>
 </html>
